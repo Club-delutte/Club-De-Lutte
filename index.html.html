@@ -1,0 +1,2517 @@
+﻿<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Club de Lutte — Excellence & Tradition</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    :root {
+      --bg-primary: #0a0a0a;
+      --bg-secondary: #171717;
+      --bg-card: #1a1a1a;
+      --bg-hover: #262626;
+      --red-500: #ef4444;
+      --red-600: #dc2626;
+      --red-700: #b91c1c;
+      --text-primary: #ffffff;
+      --text-secondary: #d4d4d4;
+      --text-muted: #a3a3a3;
+      --text-dim: #737373;
+      --border: #404040;
+      --border-light: #ffffff1a;
+    }
+
+    html { scroll-behavior: smooth; }
+    
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg-primary); }
+    ::-webkit-scrollbar-thumb { background: #262626; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--red-600); }
+
+    /* ===== NAVBAR ===== */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-light);
+      transition: all 0.3s;
+    }
+    .navbar.scrolled { background: rgba(10,10,10,0.95); }
+    .nav-logo {
+      display: flex; align-items: center; gap: 0.75rem;
+      text-decoration: none; color: var(--text-primary);
+    }
+    .nav-logo-icon {
+      width: 48px; height: 48px;
+      background: linear-gradient(135deg, var(--red-500), var(--red-700));
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900; font-size: 1.2rem;
+      overflow: hidden; flex-shrink: 0;
+      border: 2px solid rgba(255,255,255,0.18);
+      box-shadow: 0 2px 12px rgba(220,38,38,0.45);
+    }
+    .nav-logo-icon svg, .nav-logo-icon img {
+      width: 100%; height: 100%; object-fit: cover; border-radius: 50%; display: block;
+    }
+    .nav-logo-text { font-weight: 700; font-size: 1.1rem; letter-spacing: 0.02em; }
+    .nav-links {
+      display: none; gap: 2rem; list-style: none;
+    }
+    .nav-links a {
+      color: var(--text-muted); text-decoration: none;
+      font-size: 0.875rem; font-weight: 500; transition: color 0.3s;
+      letter-spacing: 0.03em; text-transform: uppercase;
+    }
+    .nav-links a:hover { color: var(--red-500); }
+    .nav-cta {
+      background: var(--red-600); color: white;
+      padding: 0.5rem 1.25rem; border-radius: 8px;
+      font-weight: 600; font-size: 0.875rem;
+      text-decoration: none; transition: all 0.3s;
+      border: none; cursor: pointer;
+    }
+    .nav-cta:hover { background: var(--red-700); transform: translateY(-1px); }
+    .mobile-toggle {
+      display: flex; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 4px; background: none; border: none;
+    }
+    .mobile-toggle span {
+      width: 24px; height: 2px; background: white;
+      border-radius: 2px; transition: 0.3s;
+    }
+    .mobile-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .mobile-toggle.active span:nth-child(2) { opacity: 0; }
+    .mobile-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+    .mobile-menu {
+      display: none; position: fixed; inset: 0;
+      background: rgba(10,10,10,0.97); z-index: 999;
+      padding: 6rem 2rem 2rem; flex-direction: column; gap: 1.5rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      color: var(--text-secondary); text-decoration: none;
+      font-size: 1.5rem; font-weight: 600; padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border-light); transition: color 0.3s;
+    }
+    .mobile-menu a:hover { color: var(--red-500); }
+    @media (min-width: 768px) {
+      .nav-links { display: flex; }
+      .mobile-toggle { display: none; }
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      position: relative; min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 2rem; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      z-index: 0;
+    }
+    .hero-bg::after {
+      content: ''; position: absolute; inset: 0;
+      background: 
+        radial-gradient(ellipse at 20% 50%, rgba(220,38,38,0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 50%, rgba(220,38,38,0.08) 0%, transparent 50%),
+        linear-gradient(180deg, rgba(10,10,10,0.7) 0%, rgba(10,10,10,0.85) 50%, rgba(10,10,10,0.95) 100%);
+      z-index: 1;
+    }
+    .hero-pattern {
+      position: absolute; inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 30px 30px; z-index: 2;
+    }
+    .hero-content { position: relative; z-index: 3; max-width: 56rem; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(220,38,38,0.1); border: 1px solid rgba(220,38,38,0.2);
+      padding: 0.375rem 1rem; border-radius: 100px;
+      font-size: 0.75rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--red-500); margin-bottom: 1.5rem;
+    }
+    .hero-badge-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--red-500); animation: pulse 2s infinite;
+    }
+    .hero-title {
+      font-size: 3rem; font-weight: 900; line-height: 1.05;
+      margin-bottom: 1.5rem; letter-spacing: -0.02em;
+    }
+    .hero-title .accent {
+      background: linear-gradient(135deg, var(--red-500), #f97316);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-subtitle {
+      font-size: 1.1rem; color: var(--text-muted);
+      line-height: 1.7; max-width: 36rem; margin: 0 auto 2.5rem;
+    }
+    .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--red-600); color: white;
+      padding: 0.875rem 2rem; border-radius: 10px;
+      font-weight: 700; font-size: 0.95rem; text-decoration: none;
+      transition: all 0.3s; border: none; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-primary:hover { background: var(--red-700); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(220,38,38,0.3); }
+    .btn-secondary {
+      background: transparent; color: var(--text-secondary);
+      padding: 0.875rem 2rem; border-radius: 10px;
+      font-weight: 600; font-size: 0.95rem; text-decoration: none;
+      transition: all 0.3s; border: 1px solid var(--border); cursor: pointer;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-secondary:hover { border-color: var(--red-500); color: var(--red-400); }
+    .hero-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem; margin-top: 4rem; padding-top: 2rem;
+      border-top: 1px solid var(--border-light);
+    }
+    .hero-stat { text-align: center; }
+    .hero-stat-number {
+      font-size: 2.5rem; font-weight: 900;
+      background: linear-gradient(135deg, var(--red-500), #f97316);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-stat-label {
+      font-size: 0.8rem; color: var(--text-dim);
+      text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.25rem;
+    }
+    @media (min-width: 768px) {
+      .hero-title { font-size: 4.5rem; }
+      .hero-subtitle { font-size: 1.2rem; }
+      .hero-stat-number { font-size: 3rem; }
+    }
+
+    /* ===== SECTIONS COMMON ===== */
+    .section {
+      padding: 5rem 1.5rem; max-width: 80rem; margin: 0 auto;
+    }
+    .section-header { text-align: center; margin-bottom: 3.5rem; }
+    .section-label {
+      display: inline-block; font-size: 0.75rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.15em;
+      color: var(--red-500); margin-bottom: 0.75rem;
+    }
+    .section-title { font-size: 2rem; font-weight: 900; margin-bottom: 1rem; }
+    .section-title .accent {
+      background: linear-gradient(135deg, var(--red-500), #f97316);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .section-desc { color: var(--text-muted); max-width: 36rem; margin: 0 auto; font-size: 1rem; }
+    @media (min-width: 768px) {
+      .section-title { font-size: 3rem; }
+      .section { padding: 6rem 2rem; }
+    }
+
+    /* ===== ABOUT ===== */
+    .about-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+    @media (min-width: 768px) { .about-grid { grid-template-columns: 1fr 1fr; gap: 3rem; } }
+    .about-image {
+      position: relative; border-radius: 1rem; overflow: hidden;
+      aspect-ratio: 4/3; background: linear-gradient(135deg, rgba(220,38,38,0.1), rgba(23,23,23,0.5));
+    }
+    .about-image img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .about-image-placeholder {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      background: radial-gradient(circle at center, rgba(220,38,38,0.15), var(--bg-secondary));
+      font-size: 4rem;
+    }
+    .about-image-overlay {
+      position: absolute; bottom: 0; left: 0; right: 0; padding: 1.5rem;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    }
+    .about-text h3 { font-size: 1.5rem; font-weight: 800; margin-bottom: 1rem; }
+    .about-text p { color: var(--text-muted); line-height: 1.8; margin-bottom: 1.5rem; }
+    .about-features { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .about-feature {
+      display: flex; align-items: center; gap: 0.75rem;
+      padding: 0.75rem; background: var(--bg-secondary);
+      border-radius: 0.75rem; border: 1px solid var(--border-light);
+    }
+    .about-feature-icon {
+      width: 2.5rem; height: 2.5rem; background: rgba(220,38,38,0.15);
+      border-radius: 0.5rem; display: flex; align-items: center;
+      justify-content: center; font-size: 1.2rem; flex-shrink: 0;
+    }
+    .about-feature-text { font-size: 0.85rem; font-weight: 600; }
+
+    /* ===== PROGRAMS ===== */
+    .programs-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+    @media (min-width: 768px) { .programs-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .programs-grid { grid-template-columns: repeat(3, 1fr); } }
+    .program-card {
+      background: var(--bg-card); border: 1px solid var(--border-light);
+      border-radius: 1rem; padding: 2rem; transition: all 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .program-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--red-600), transparent);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .program-card:hover { border-color: rgba(220,38,38,0.3); transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+    .program-card:hover::before { opacity: 1; }
+    .program-icon {
+      width: 3.5rem; height: 3.5rem; background: rgba(220,38,38,0.1);
+      border-radius: 0.75rem; display: flex; align-items: center;
+      justify-content: center; font-size: 1.5rem; margin-bottom: 1.25rem;
+    }
+    .program-name { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .program-desc { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.25rem; }
+    .program-meta { display: flex; gap: 1rem; font-size: 0.8rem; color: var(--text-dim); }
+    .program-meta span { display: flex; align-items: center; gap: 0.375rem; }
+    .program-price {
+      margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border-light);
+      font-size: 1.5rem; font-weight: 900; color: var(--red-500);
+    }
+    .program-price small { font-size: 0.75rem; color: var(--text-dim); font-weight: 400; }
+
+    /* ===== COACHES ===== */
+    .coaches-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+    @media (min-width: 640px) { .coaches-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .coaches-grid { grid-template-columns: repeat(3, 1fr); } }
+    .coach-card {
+      background: var(--bg-card); border: 1px solid var(--border-light);
+      border-radius: 1rem; overflow: hidden; transition: all 0.3s;
+    }
+    .coach-card:hover { border-color: rgba(220,38,38,0.3); transform: translateY(-4px); }
+    .coach-avatar {
+      height: 16rem; background: linear-gradient(135deg, rgba(220,38,38,0.1), var(--bg-secondary));
+      display: flex; align-items: center; justify-content: center; font-size: 4rem;
+      overflow: hidden; position: relative;
+    }
+    .coach-avatar img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .coach-info { padding: 1.5rem; }
+    .coach-name { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.25rem; }
+    .coach-role { font-size: 0.85rem; color: var(--red-500); font-weight: 500; margin-bottom: 0.75rem; }
+    .coach-bio { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+    .coach-badge {
+      display: inline-flex; align-items: center; gap: 0.375rem;
+      background: rgba(220,38,38,0.1); padding: 0.25rem 0.75rem;
+      border-radius: 100px; font-size: 0.7rem; font-weight: 600;
+      color: var(--red-400); margin-top: 0.75rem;
+    }
+
+    /* ===== SCHEDULE ===== */
+    .schedule-table {
+      width: 100%; background: var(--bg-card);
+      border: 1px solid var(--border-light); border-radius: 1rem; overflow: hidden;
+    }
+    .schedule-header {
+      display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;
+      padding: 1rem 1.5rem; background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-light);
+      font-size: 0.75rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--text-dim);
+    }
+    .schedule-row {
+      display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;
+      padding: 1rem 1.5rem; border-bottom: 1px solid var(--border-light);
+      transition: background 0.3s; font-size: 0.9rem;
+    }
+    .schedule-row:last-child { border-bottom: none; }
+    .schedule-row:hover { background: rgba(220,38,38,0.03); }
+    .schedule-day { font-weight: 600; color: var(--text-primary); }
+    .schedule-time { color: var(--red-400); font-weight: 500; }
+    .schedule-type { color: var(--text-muted); }
+    .schedule-level {
+      display: inline-flex; padding: 0.2rem 0.6rem;
+      border-radius: 100px; font-size: 0.7rem; font-weight: 600;
+    }
+    .level-beginner { background: rgba(34,197,94,0.1); color: #4ade80; }
+    .level-intermediate { background: rgba(234,179,8,0.1); color: #fbbf24; }
+    .level-advanced { background: rgba(220,38,38,0.1); color: #f87171; }
+    .level-all { background: rgba(99,102,241,0.1); color: #818cf8; }
+    @media (max-width: 639px) {
+      .schedule-header, .schedule-row { grid-template-columns: 1fr 1fr; font-size: 0.8rem; }
+      .schedule-header span:nth-child(3), .schedule-header span:nth-child(4),
+      .schedule-row span:nth-child(3), .schedule-row span:nth-child(4) { display: none; }
+    }
+
+    /* ===== GALLERY ===== */
+    .gallery-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;
+    }
+    @media (min-width: 768px) { .gallery-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (min-width: 1024px) { .gallery-grid { grid-template-columns: repeat(4, 1fr); } }
+    .gallery-item {
+      position: relative; border-radius: 0.75rem; overflow: hidden;
+      aspect-ratio: 1; background: linear-gradient(135deg, rgba(220,38,38,0.08), var(--bg-secondary));
+      cursor: pointer; transition: transform 0.3s;
+    }
+    .gallery-item:hover { transform: scale(1.03); }
+    .gallery-item-inner {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.5rem; overflow: hidden;
+    }
+    .gallery-item-inner img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .gallery-item-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.7), transparent 60%);
+      opacity: 0; transition: opacity 0.3s;
+      display: flex; align-items: flex-end; padding: 1rem;
+    }
+    .gallery-item:hover .gallery-item-overlay { opacity: 1; }
+    .gallery-item-label { font-size: 0.8rem; font-weight: 600; }
+
+    /* ===== VIDEOS ===== */
+    .videos-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+    @media (min-width: 768px) { .videos-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .videos-grid { grid-template-columns: repeat(3, 1fr); } }
+    .video-card {
+      background: var(--bg-card); border: 1px solid var(--border-light);
+      border-radius: 1rem; overflow: hidden; transition: all 0.3s;
+    }
+    .video-card:hover { border-color: rgba(220,38,38,0.3); transform: translateY(-4px); }
+    .video-card video {
+      width: 100%; aspect-ratio: 16 / 9; background: #000;
+      display: block; object-fit: cover;
+    }
+    .video-info { padding: 1.25rem; }
+    .video-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.375rem; }
+    .video-desc { color: var(--text-muted); font-size: 0.85rem; line-height: 1.6; margin-bottom: 1rem; }
+    .video-download {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--red-600); color: #fff; text-decoration: none;
+      padding: 0.5rem 1.1rem; border-radius: 0.5rem;
+      font-size: 0.8rem; font-weight: 600; transition: all 0.3s;
+    }
+    .video-download:hover { background: var(--red-700); transform: translateY(-1px); }
+
+    /* ===== PRICING ===== */
+    .pricing-grid {
+      display: grid; grid-template-columns: 1fr; gap: 1.5rem;
+      max-width: 64rem; margin: 0 auto;
+    }
+    @media (min-width: 768px) { .pricing-grid { grid-template-columns: repeat(3, 1fr); } }
+    .pricing-card {
+      background: var(--bg-card); border: 1px solid var(--border-light);
+      border-radius: 1rem; padding: 2.5rem 2rem; text-align: center;
+      transition: all 0.3s; position: relative;
+    }
+    .pricing-card.featured {
+      border-color: var(--red-600); box-shadow: 0 0 30px rgba(220,38,38,0.15);
+    }
+    .pricing-card:hover { transform: translateY(-4px); }
+    .pricing-popular {
+      position: absolute; top: -0.75rem; left: 50%; transform: translateX(-50%);
+      background: var(--red-600); color: white; padding: 0.25rem 1rem;
+      border-radius: 100px; font-size: 0.7rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .pricing-name { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .pricing-price { font-size: 3rem; font-weight: 900; margin-bottom: 0.25rem; }
+    .pricing-price .currency { font-size: 1.5rem; vertical-align: super; }
+    .pricing-price .period { font-size: 0.85rem; color: var(--text-dim); font-weight: 400; }
+    .pricing-desc { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.5rem; }
+    .pricing-features { list-style: none; text-align: left; margin-bottom: 2rem; }
+    .pricing-features li {
+      display: flex; align-items: center; gap: 0.5rem;
+      padding: 0.5rem 0; font-size: 0.85rem; color: var(--text-secondary);
+      border-bottom: 1px solid var(--border-light);
+    }
+    .pricing-features li:last-child { border-bottom: none; }
+    .pricing-check { color: var(--red-500); font-weight: bold; }
+
+    /* ===== TESTIMONIALS ===== */
+    .testimonials-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+    @media (min-width: 768px) { .testimonials-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .testimonials-grid { grid-template-columns: repeat(3, 1fr); } }
+    .testimonial-card {
+      background: var(--bg-card); border: 1px solid var(--border-light);
+      border-radius: 1rem; padding: 2rem;
+    }
+    .testimonial-stars { color: #fbbf24; font-size: 0.9rem; margin-bottom: 1rem; }
+    .testimonial-text {
+      color: var(--text-muted); font-size: 0.9rem; line-height: 1.7;
+      margin-bottom: 1.5rem; font-style: italic;
+    }
+    .testimonial-author { display: flex; align-items: center; gap: 0.75rem; }
+    .testimonial-avatar {
+      width: 2.5rem; height: 2.5rem; border-radius: 50%;
+      background: linear-gradient(135deg, var(--red-600), #f97316);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 0.8rem;
+    }
+    .testimonial-name { font-weight: 600; font-size: 0.9rem; }
+    .testimonial-role { font-size: 0.75rem; color: var(--text-dim); }
+
+    /* ===== CONTACT ===== */
+    .contact-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+    @media (min-width: 768px) { .contact-grid { grid-template-columns: 1fr 1fr; } }
+    .contact-info-card {
+      background: var(--bg-card); border: 1px solid var(--border-light);
+      border-radius: 1rem; padding: 2rem;
+    }
+    .contact-item {
+      display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.5rem;
+    }
+    .contact-item:last-child { margin-bottom: 0; }
+    .contact-icon {
+      width: 2.75rem; height: 2.75rem; background: rgba(220,38,38,0.1);
+      border-radius: 0.75rem; display: flex; align-items: center;
+      justify-content: center; font-size: 1.2rem; flex-shrink: 0;
+    }
+    .contact-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.25rem; }
+    .contact-value { font-weight: 600; font-size: 0.95rem; }
+    .contact-form {
+      background: var(--bg-card); border: 1px solid var(--border-light);
+      border-radius: 1rem; padding: 2rem;
+    }
+    .form-group { margin-bottom: 1.25rem; }
+    .form-label {
+      display: block; font-size: 0.8rem; font-weight: 600;
+      color: var(--text-secondary); margin-bottom: 0.5rem;
+    }
+    .form-input, .form-textarea {
+      width: 100%; background: var(--bg-secondary);
+      border: 1px solid var(--border-light); border-radius: 0.5rem;
+      padding: 0.75rem 1rem; color: var(--text-primary);
+      font-family: inherit; font-size: 0.9rem; transition: border-color 0.3s;
+    }
+    .form-input:focus, .form-textarea:focus { outline: none; border-color: var(--red-500); }
+    .form-textarea { resize: vertical; min-height: 120px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      border-top: 1px solid var(--border-light); padding: 3rem 1.5rem 2rem;
+      background: var(--bg-primary);
+    }
+    .footer-inner { max-width: 80rem; margin: 0 auto; }
+    .footer-grid {
+      display: grid; grid-template-columns: 1fr; gap: 2rem; margin-bottom: 2rem;
+    }
+    @media (min-width: 768px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; } }
+    .footer-brand p { color: var(--text-muted); font-size: 0.85rem; line-height: 1.7; margin-top: 1rem; max-width: 20rem; }
+    .footer-title { font-weight: 700; font-size: 0.85rem; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.08em; }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 0.5rem; }
+    .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
+    .footer-links a:hover { color: var(--red-400); }
+    .footer-social { display: flex; gap: 0.75rem; margin-top: 1rem; }
+    .footer-social a {
+      width: 2.5rem; height: 2.5rem; background: var(--bg-secondary);
+      border: 1px solid var(--border-light); border-radius: 0.5rem;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; transition: all 0.3s; text-decoration: none;
+    }
+    .footer-social a:hover { border-color: var(--red-500); background: rgba(220,38,38,0.1); }
+    .footer-bottom {
+      padding-top: 1.5rem; border-top: 1px solid var(--border-light);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem; font-size: 0.8rem; color: var(--text-dim);
+    }
+
+    /* ===== ADMIN PANEL ===== */
+    .admin-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.85); z-index: 5000;
+      align-items: flex-start; justify-content: center;
+      padding: 1rem; overflow-y: auto;
+    }
+    .admin-overlay.open { display: flex; }
+    .admin-panel {
+      background: var(--bg-secondary); border: 1px solid var(--border);
+      border-radius: 1rem; width: 100%; max-width: 700px;
+      padding: 2rem; margin: 2rem auto;
+      position: relative;
+    }
+    .admin-title {
+      font-size: 1.3rem; font-weight: 800; margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .admin-close {
+      position: absolute; top: 1.25rem; right: 1.25rem;
+      background: none; border: none; color: var(--text-muted);
+      font-size: 1.5rem; cursor: pointer; line-height: 1;
+    }
+    .admin-close:hover { color: var(--red-500); }
+    .admin-section {
+      margin-bottom: 1.5rem; padding: 1.25rem;
+      background: var(--bg-card); border-radius: 0.75rem;
+      border: 1px solid var(--border-light);
+    }
+    .admin-section-title {
+      font-size: 0.95rem; font-weight: 700; margin-bottom: 1rem;
+      color: var(--red-400);
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .admin-field { margin-bottom: 0.75rem; }
+    .admin-field:last-child { margin-bottom: 0; }
+    .admin-field label {
+      display: block; font-size: 0.75rem; font-weight: 600;
+      color: var(--text-muted); margin-bottom: 0.25rem;
+    }
+    .admin-field input[type="text"],
+    .admin-field input[type="password"],
+    .admin-field textarea {
+      width: 100%; background: var(--bg-primary);
+      border: 1px solid var(--border-light); border-radius: 0.375rem;
+      padding: 0.5rem 0.75rem; color: white; font-family: inherit; font-size: 0.85rem;
+    }
+    .admin-field input:focus, .admin-field textarea:focus { outline: none; border-color: var(--red-500); }
+    
+    /* Image upload fields */
+    .admin-image-field {
+      margin-bottom: 1rem;
+    }
+    .admin-image-field label {
+      display: block; font-size: 0.75rem; font-weight: 600;
+      color: var(--text-muted); margin-bottom: 0.5rem;
+    }
+    .admin-image-preview {
+      width: 100%; max-height: 150px; object-fit: cover;
+      border-radius: 0.5rem; border: 1px solid var(--border-light);
+      margin-bottom: 0.5rem; display: none;
+      background: var(--bg-primary);
+    }
+    .admin-image-preview.visible { display: block; }
+    .admin-image-upload {
+      display: flex; gap: 0.5rem; align-items: center;
+    }
+    .admin-image-upload input[type="file"] {
+      display: none;
+    }
+    .admin-image-btn {
+      background: var(--bg-secondary); border: 1px solid var(--border);
+      color: var(--text-secondary); padding: 0.4rem 0.75rem;
+      border-radius: 0.375rem; font-size: 0.75rem; font-weight: 600;
+      cursor: pointer; transition: all 0.3s; white-space: nowrap;
+    }
+    .admin-image-btn:hover { border-color: var(--red-500); color: var(--red-400); }
+    .admin-image-remove {
+      background: none; border: 1px solid rgba(239,68,68,0.3);
+      color: #f87171; padding: 0.4rem 0.75rem;
+      border-radius: 0.375rem; font-size: 0.75rem; font-weight: 600;
+      cursor: pointer; transition: all 0.3s; white-space: nowrap;
+    }
+    .admin-image-remove:hover { background: rgba(239,68,68,0.1); }
+    .admin-image-name {
+      font-size: 0.7rem; color: var(--text-dim); overflow: hidden;
+      text-overflow: ellipsis; white-space: nowrap; max-width: 150px;
+    }
+    
+    .admin-btn {
+      background: var(--red-600); color: white; border: none;
+      padding: 0.625rem 1.5rem; border-radius: 0.5rem;
+      font-weight: 700; cursor: pointer; transition: all 0.3s; font-size: 0.85rem;
+    }
+    .admin-btn:hover { background: var(--red-700); }
+    .admin-btn-secondary {
+      background: var(--bg-secondary); border: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+    .admin-btn-secondary:hover { border-color: var(--red-500); }
+
+    /* Login modal */
+    .login-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.85); z-index: 6000;
+      align-items: center; justify-content: center; padding: 1rem;
+    }
+    .login-overlay.open { display: flex; }
+    .login-box {
+      background: var(--bg-secondary); border: 1px solid var(--border);
+      border-radius: 1rem; padding: 2.5rem;
+      width: 100%; max-width: 400px; text-align: center;
+    }
+    .login-box h2 { font-size: 1.3rem; font-weight: 800; margin-bottom: 0.5rem; }
+    .login-box p { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.5rem; }
+    .login-box input {
+      width: 100%; background: var(--bg-primary);
+      border: 1px solid var(--border); border-radius: 0.5rem;
+      padding: 0.75rem 1rem; color: white; font-family: inherit;
+      font-size: 0.9rem; margin-bottom: 1rem;
+    }
+    .login-box input:focus { outline: none; border-color: var(--red-500); }
+    .login-error { color: #f87171; font-size: 0.8rem; margin-bottom: 0.75rem; display: none; }
+
+    /* Admin floating button */
+    .admin-fab {
+      position: fixed; bottom: 2rem; right: 2rem;
+      width: 3.5rem; height: 3.5rem; background: var(--red-600);
+      border: none; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; cursor: pointer; z-index: 4000;
+      box-shadow: 0 4px 15px rgba(220,38,38,0.4); transition: all 0.3s;
+    }
+    .admin-fab:hover { background: var(--red-700); transform: scale(1.1); }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes pulse { 50% { opacity: 0.5; } }
+    .fade-in-up {
+      opacity: 0; transform: translateY(30px); transition: opacity 0.6s, transform 0.6s;
+    }
+    .fade-in-up.visible { opacity: 1; transform: translateY(0); }
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-light), transparent);
+      margin: 0 auto; max-width: 60rem;
+    }
+    .toast {
+      position: fixed; top: 1.5rem; right: 1.5rem;
+      background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3);
+      color: #4ade80; padding: 0.75rem 1.25rem; border-radius: 0.5rem;
+      font-size: 0.85rem; font-weight: 600; z-index: 10000; display: none;
+    }
+    .toast.show { display: flex; align-items: center; gap: 0.5rem; }
+
+    /* Image modal (lightbox) */
+    .lightbox {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.92); z-index: 7000;
+      align-items: center; justify-content: center;
+      cursor: pointer;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 90vw; max-height: 90vh; border-radius: 0.5rem;
+      box-shadow: 0 0 40px rgba(0,0,0,0.5);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="toast" id="toast">✓ Modifications enregistrées</div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <img id="lightboxImg" src="" alt="">
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-icon" id="navLogoIcon">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="Logo Club de Lutte" role="img">
+          <defs>
+            <linearGradient id="clGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#ef4444"/>
+              <stop offset="100%" stop-color="#991b1b"/>
+            </linearGradient>
+          </defs>
+          <circle cx="50" cy="50" r="49" fill="url(#clGrad)"/>
+          <circle cx="50" cy="50" r="42" fill="none" stroke="#ffffff" stroke-opacity="0.35" stroke-width="1.5"/>
+          <circle cx="50" cy="50" r="36" fill="none" stroke="#ffffff" stroke-opacity="0.18" stroke-width="1"/>
+          <polygon points="50,21 52.23,26.93 58.56,27.22 53.61,31.17 55.29,37.28 50,33.8 44.71,37.28 46.39,31.17 41.44,27.22 47.77,26.93" fill="#fbbf24"/>
+          <text x="50" y="72" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-weight="900" font-size="26" fill="#ffffff">CL</text>
+        </svg>
+      </div>
+      <span class="nav-logo-text" data-edit="siteName">Club de Lutte</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about" data-edit="navAbout">À propos</a></li>
+      <li><a href="#programs" data-edit="navPrograms">Programmes</a></li>
+      <li><a href="#coaches" data-edit="navCoaches">Entraîneurs</a></li>
+      <li><a href="#schedule" data-edit="navSchedule">Horaires</a></li>
+      <li><a href="#pricing" data-edit="navPricing">Tarifs</a></li>
+      <li><a href="#contact" data-edit="navContact">Contact</a></li>
+      <li><a href="#videos" data-edit="navVideos">Vidéos</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta" data-edit="navCta">S'inscrire</a>
+    <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about" data-edit="navAbout2" onclick="closeMobileMenu()">À propos</a>
+    <a href="#programs" data-edit="navPrograms2" onclick="closeMobileMenu()">Programmes</a>
+    <a href="#coaches" data-edit="navCoaches2" onclick="closeMobileMenu()">Entraîneurs</a>
+    <a href="#schedule" data-edit="navSchedule2" onclick="closeMobileMenu()">Horaires</a>
+    <a href="#pricing" data-edit="navPricing2" onclick="closeMobileMenu()">Tarifs</a>
+    <a href="#gallery" data-edit="navGallery" onclick="closeMobileMenu()">Galerie</a>
+    <a href="#contact" data-edit="navContact2" onclick="closeMobileMenu()">Contact</a>
+    <a href="#videos" data-edit="navVideos2" onclick="closeMobileMenu()">Vidéos</a>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <div class="hero-bg" id="heroBg"></div>
+    <div class="hero-pattern"></div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        <span data-edit="heroBadge">Inscriptions ouvertes 2025-2026</span>
+      </div>
+      <h1 class="hero-title" id="heroTitle" data-edit="heroTitle">
+        L'Excellence de la<br><span class="accent">Lutte Olympique</span>
+      </h1>
+      <p class="hero-subtitle" id="heroSubtitle" data-edit="heroSubtitle">
+        Rejoignez notre club d'élite et découvrez la passion de la lutte. Entraînement professionnel, esprit d'équipe et dépassement de soi.
+      </p>
+      <div class="hero-buttons">
+        <a href="#programs" class="btn-primary">🏋️ Découvrir nos programmes</a>
+        <a href="#schedule" class="btn-secondary">📅 Voir les horaires</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-number" id="stat1" data-edit="stat1">15+</div>
+          <div class="hero-stat-label" data-edit="stat1Label">Années d'expérience</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-number" id="stat2" data-edit="stat2">200+</div>
+          <div class="hero-stat-label" data-edit="stat2Label">Membres actifs</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-number" id="stat3" data-edit="stat3">50+</div>
+          <div class="hero-stat-label" data-edit="stat3Label">Médailles remportées</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <div class="section-divider"></div>
+  <section class="section" id="about">
+    <div class="section-header">
+      <span class="section-label" data-edit="aboutLabel">Notre Histoire</span>
+      <h2 class="section-title" id="aboutTitle" data-edit="aboutTitle">Un Club, Une <span class="accent">Famille</span></h2>
+      <p class="section-desc" id="aboutDesc" data-edit="aboutDesc">Depuis plus de 15 ans, nous formons des champions sur le tapis et dans la vie.</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-image" id="aboutImageBox">
+        <div class="about-image-placeholder" id="aboutPlaceholder">🤼</div>
+        <img id="aboutImage" src="" alt="" style="display:none">
+        <div class="about-image-overlay">
+          <span style="font-weight:700;font-size:0.9rem;" data-edit="aboutImgLabel">Entraînement intensif</span>
+        </div>
+      </div>
+      <div class="about-text">
+        <h3 id="aboutH3" data-edit="aboutH3">Tradition & Excellence depuis 2009</h3>
+        <p id="aboutP1" data-edit="aboutP1">Fondé par des passionnés de lutte olympique, notre club s'est imposé comme une référence dans la formation des athlètes de tous niveaux. Du débutant curieux au compétiteur aguerri, nous offrons un cadre d'entraînement d'exception.</p>
+        <p id="aboutP2" data-edit="aboutP2">Notre philosophie repose sur trois piliers : la technique, la condition physique et le mental. Chaque séance est conçue pour vous pousser au-delà de vos limites tout en respectant votre rythme.</p>
+        <div class="about-features">
+          <div class="about-feature">
+            <div class="about-feature-icon">🏆</div>
+            <div class="about-feature-text" data-edit="aboutFeat1">Champions nationaux</div>
+          </div>
+          <div class="about-feature">
+            <div class="about-feature-icon">🤝</div>
+            <div class="about-feature-text" data-edit="aboutFeat2">Esprit d'équipe</div>
+          </div>
+          <div class="about-feature">
+            <div class="about-feature-icon">💪</div>
+            <div class="about-feature-text" data-edit="aboutFeat3">Coaching expert</div>
+          </div>
+          <div class="about-feature">
+            <div class="about-feature-icon">🛡️</div>
+            <div class="about-feature-text" data-edit="aboutFeat4">Sécurité prioritaire</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Programs -->
+  <div class="section-divider"></div>
+  <section class="section" id="programs">
+    <div class="section-header">
+      <span class="section-label" data-edit="programsLabel">Nos Programmes</span>
+      <h2 class="section-title" data-edit="programsTitle">Trouvez Votre <span class="accent">Voie</span></h2>
+      <p class="section-desc" data-edit="programsDesc">Des programmes adaptés à tous les niveaux, des débutants aux compétiteurs confirmés.</p>
+    </div>
+    <div class="programs-grid">
+      <div class="program-card fade-in-up">
+        <div class="program-icon">🌱</div>
+        <div class="program-name" data-edit="prog1Name">Initiation</div>
+        <div class="program-desc" data-edit="prog1Desc">Découvrez les bases de la lutte olympique dans une ambiance conviviale.</div>
+        <div class="program-meta" data-edit="prog1Meta"><span>⏱ 1h30</span><span>📅 2x/sem</span><span>👤 8-14 ans</span></div>
+        <div class="program-price" data-edit="prog1Price">40€ <small>/mois</small></div>
+      </div>
+      <div class="program-card fade-in-up">
+        <div class="program-icon">⚡</div>
+        <div class="program-name" data-edit="prog2Name">Perfectionnement</div>
+        <div class="program-desc" data-edit="prog2Desc">Approfondissez vos techniques et préparez-vous aux compétitions.</div>
+        <div class="program-meta" data-edit="prog2Meta"><span>⏱ 2h</span><span>📅 3x/sem</span><span>👤 14-18 ans</span></div>
+        <div class="program-price" data-edit="prog2Price">60€ <small>/mois</small></div>
+      </div>
+      <div class="program-card fade-in-up">
+        <div class="program-icon">🔥</div>
+        <div class="program-name" data-edit="prog3Name">Élite Compétition</div>
+        <div class="program-desc" data-edit="prog3Desc">Programme intensif pour les championnats nationaux et internationaux.</div>
+        <div class="program-meta" data-edit="prog3Meta"><span>⏱ 2h30</span><span>📅 5x/sem</span><span>👤 16+ ans</span></div>
+        <div class="program-price" data-edit="prog3Price">90€ <small>/mois</small></div>
+      </div>
+      <div class="program-card fade-in-up">
+        <div class="program-icon">🏋️</div>
+        <div class="program-name" data-edit="prog4Name">Préparation Physique</div>
+        <div class="program-desc" data-edit="prog4Desc">Renforcement musculaire, cardio et mobilité pour optimiser vos performances.</div>
+        <div class="program-meta" data-edit="prog4Meta"><span>⏱ 1h</span><span>📅 2x/sem</span><span>👤 Tous</span></div>
+        <div class="program-price" data-edit="prog4Price">30€ <small>/mois</small></div>
+      </div>
+      <div class="program-card fade-in-up">
+        <div class="program-icon">👩‍🎓</div>
+        <div class="program-name" data-edit="prog5Name">Lutte Universitaire</div>
+        <div class="program-desc" data-edit="prog5Desc">Programme pour étudiants avec horaires flexibles et tarifs réduits.</div>
+        <div class="program-meta" data-edit="prog5Meta"><span>⏱ 1h30</span><span>📅 3x/sem</span><span>👤 Étudiants</span></div>
+        <div class="program-price" data-edit="prog5Price">35€ <small>/mois</small></div>
+      </div>
+      <div class="program-card fade-in-up">
+        <div class="program-icon">🧘</div>
+        <div class="program-name" data-edit="prog6Name">Récupération & Mobilité</div>
+        <div class="program-desc" data-edit="prog6Desc">Yoga, étirements et techniques de récupération pour prévenir les blessures.</div>
+        <div class="program-meta" data-edit="prog6Meta"><span>⏱ 45min</span><span>📅 2x/sem</span><span>👤 Tous</span></div>
+        <div class="program-price" data-edit="prog6Price">25€ <small>/mois</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Coaches -->
+  <div class="section-divider"></div>
+  <section class="section" id="coaches">
+    <div class="section-header">
+      <span class="section-label" data-edit="coachesLabel">Nos Entraîneurs</span>
+      <h2 class="section-title" data-edit="coachesTitle">L'Expérience à Votre <span class="accent">Service</span></h2>
+    </div>
+    <div class="coaches-grid">
+      <div class="coach-card fade-in-up">
+        <div class="coach-avatar" id="coach1Avatar">
+          <span id="coach1Emoji">🥇</span>
+          <img id="coach1Img" src="" alt="" style="display:none;position:absolute;inset:0">
+        </div>
+        <div class="coach-info">
+          <div class="coach-name" id="coach1Name" data-edit="coach1Name">Karim Benali</div>
+          <div class="coach-role" id="coach1Role" data-edit="coach1Role">Entraîneur Chef</div>
+          <div class="coach-bio" id="coach1Bio" data-edit="coach1Bio">Ancien champion national, 20 ans d'expérience en formation des athlètes de haut niveau.</div>
+          <div class="coach-badge" id="coach1Badge" data-edit="coach1Badge">🏅 Ceinture noire 3e dan</div>
+        </div>
+      </div>
+      <div class="coach-card fade-in-up">
+        <div class="coach-avatar" id="coach2Avatar">
+          <span id="coach2Emoji">🥈</span>
+          <img id="coach2Img" src="" alt="" style="display:none;position:absolute;inset:0">
+        </div>
+        <div class="coach-info">
+          <div class="coach-name" id="coach2Name" data-edit="coach2Name">Sophie Mercier</div>
+          <div class="coach-role" id="coach2Role" data-edit="coach2Role">Entraîneuse Adjointe</div>
+          <div class="coach-bio" id="coach2Bio" data-edit="coach2Bio">Spécialiste lutte féminine, médaillée européenne.</div>
+          <div class="coach-badge" id="coach2Badge" data-edit="coach2Badge">🏅 Médaillée européenne</div>
+        </div>
+      </div>
+      <div class="coach-card fade-in-up">
+        <div class="coach-avatar" id="coach3Avatar">
+          <span id="coach3Emoji">🥉</span>
+          <img id="coach3Img" src="" alt="" style="display:none;position:absolute;inset:0">
+        </div>
+        <div class="coach-info">
+          <div class="coach-name" id="coach3Name" data-edit="coach3Name">Youssef Hadj</div>
+          <div class="coach-role" id="coach3Role" data-edit="coach3Role">Coach Jeunes</div>
+          <div class="coach-bio" id="coach3Bio" data-edit="coach3Bio">Éducateur sportif certifié, passionné par la transmission aux jeunes talents.</div>
+          <div class="coach-badge" id="coach3Badge" data-edit="coach3Badge">🏅 BF3</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Schedule -->
+  <div class="section-divider"></div>
+  <section class="section" id="schedule">
+    <div class="section-header">
+      <span class="section-label" data-edit="scheduleLabel">Horaires</span>
+      <h2 class="section-title" data-edit="scheduleTitle">Planning <span class="accent">Hebdomadaire</span></h2>
+    </div>
+    <div class="schedule-table fade-in-up">
+      <div class="schedule-header">
+        <span>Jour</span><span>Horaire</span><span>Type</span><span>Niveau</span>
+      </div>
+      <div class="schedule-row">
+        <span class="schedule-day">Lundi</span><span class="schedule-time">17h00 - 18h30</span>
+        <span class="schedule-type">Lutte Libre</span><span><span class="schedule-level level-all">Tous niveaux</span></span>
+      </div>
+      <div class="schedule-row">
+        <span class="schedule-day">Lundi</span><span class="schedule-time">19h00 - 21h00</span>
+        <span class="schedule-type">Gréco-Romaine</span><span><span class="schedule-level level-advanced">Avancé</span></span>
+      </div>
+      <div class="schedule-row">
+        <span class="schedule-day">Mardi</span><span class="schedule-time">17h00 - 18h30</span>
+        <span class="schedule-type">Initiation Jeunes</span><span><span class="schedule-level level-beginner">Débutant</span></span>
+      </div>
+      <div class="schedule-row">
+        <span class="schedule-day">Mardi</span><span class="schedule-time">19h00 - 20h30</span>
+        <span class="schedule-type">Perfectionnement</span><span><span class="schedule-level level-intermediate">Intermédiaire</span></span>
+      </div>
+      <div class="schedule-row">
+        <span class="schedule-day">Mercredi</span><span class="schedule-time">10h00 - 11h30</span>
+        <span class="schedule-type">Préparation Physique</span><span><span class="schedule-level level-all">Tous niveaux</span></span>
+      </div>
+      <div class="schedule-row">
+        <span class="schedule-day">Jeudi</span><span class="schedule-time">17h00 - 18h30</span>
+        <span class="schedule-type">Technique & Sparring</span><span><span class="schedule-level level-intermediate">Intermédiaire</span></span>
+      </div>
+      <div class="schedule-row">
+        <span class="schedule-day">Jeudi</span><span class="schedule-time">19h00 - 21h30</span>
+        <span class="schedule-type">Entraînement Élite</span><span><span class="schedule-level level-advanced">Avancé</span></span>
+      </div>
+      <div class="schedule-row">
+        <span class="schedule-day">Vendredi</span><span class="schedule-time">17h00 - 18h30</span>
+        <span class="schedule-type">Lutte Libre</span><span><span class="schedule-level level-all">Tous niveaux</span></span>
+      </div>
+      <div class="schedule-row">
+        <span class="schedule-day">Vendredi</span><span class="schedule-time">19h00 - 20h00</span>
+        <span class="schedule-type">Récupération</span><span><span class="schedule-level level-all">Tous niveaux</span></span>
+      </div>
+      <div class="schedule-row">
+        <span class="schedule-day">Samedi</span><span class="schedule-time">09h00 - 11h00</span>
+        <span class="schedule-type">Open Mat</span><span><span class="schedule-level level-all">Tous niveaux</span></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <div class="section-divider"></div>
+  <section class="section" id="gallery">
+    <div class="section-header">
+      <span class="section-label" data-edit="galleryLabel">Galerie</span>
+      <h2 class="section-title" data-edit="galleryTitle">Moments de <span class="accent">Passion</span></h2>
+    </div>
+    <div class="gallery-grid" id="galleryGrid">
+      <div class="gallery-item fade-in-up" onclick="openLightbox(this)">
+        <div class="gallery-item-inner" id="gallery0Inner">🤼</div>
+        <div class="gallery-item-overlay"><span class="gallery-item-label" data-edit="gal1Label">Entraînement</span></div>
+      </div>
+      <div class="gallery-item fade-in-up" onclick="openLightbox(this)">
+        <div class="gallery-item-inner" id="gallery1Inner">🏆</div>
+        <div class="gallery-item-overlay"><span class="gallery-item-label" data-edit="gal2Label">Compétition</span></div>
+      </div>
+      <div class="gallery-item fade-in-up" onclick="openLightbox(this)">
+        <div class="gallery-item-inner" id="gallery2Inner">💪</div>
+        <div class="gallery-item-overlay"><span class="gallery-item-label" data-edit="gal3Label">Préparation</span></div>
+      </div>
+      <div class="gallery-item fade-in-up" onclick="openLightbox(this)">
+        <div class="gallery-item-inner" id="gallery3Inner">🥇</div>
+        <div class="gallery-item-overlay"><span class="gallery-item-label" data-edit="gal4Label">Victoire</span></div>
+      </div>
+      <div class="gallery-item fade-in-up" onclick="openLightbox(this)">
+        <div class="gallery-item-inner" id="gallery4Inner">🤝</div>
+        <div class="gallery-item-overlay"><span class="gallery-item-label" data-edit="gal5Label">Esprit d'équipe</span></div>
+      </div>
+      <div class="gallery-item fade-in-up" onclick="openLightbox(this)">
+        <div class="gallery-item-inner" id="gallery5Inner">🏋️</div>
+        <div class="gallery-item-overlay"><span class="gallery-item-label" data-edit="gal6Label">Musculation</span></div>
+      </div>
+      <div class="gallery-item fade-in-up" onclick="openLightbox(this)">
+        <div class="gallery-item-inner" id="gallery6Inner">🧘</div>
+        <div class="gallery-item-overlay"><span class="gallery-item-label" data-edit="gal7Label">Récupération</span></div>
+      </div>
+      <div class="gallery-item fade-in-up" onclick="openLightbox(this)">
+        <div class="gallery-item-inner" id="gallery7Inner">🎉</div>
+        <div class="gallery-item-overlay"><span class="gallery-item-label" data-edit="gal8Label">Événements</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <div class="section-divider"></div>
+  <section class="section" id="pricing">
+    <div class="section-header">
+      <span class="section-label" data-edit="pricingLabel">Tarifs</span>
+      <h2 class="section-title" data-edit="pricingTitle">Investissez dans Votre <span class="accent">Avenir</span></h2>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card fade-in-up">
+        <div class="pricing-name" data-edit="price1Name">Essentiel</div>
+        <div class="pricing-price" data-edit="price1Num"><span class="currency">€</span>40<span class="period">/mois</span></div>
+        <div class="pricing-desc" data-edit="price1Desc">Parfait pour débuter</div>
+        <ul class="pricing-features" data-edit="price1Feat">
+          <li><span class="pricing-check">✓</span> 2 séances / semaine</li>
+          <li><span class="pricing-check">✓</span> Accès vestiaires</li>
+          <li><span class="pricing-check">✓</span> Assurance club</li>
+          <li><span class="pricing-check">✓</span> Initiation offerte</li>
+        </ul>
+        <button class="btn-primary" style="width:100%;justify-content:center" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Choisir</button>
+      </div>
+      <div class="pricing-card featured fade-in-up">
+        <div class="pricing-popular">Le plus populaire</div>
+        <div class="pricing-name" data-edit="price2Name">Performance</div>
+        <div class="pricing-price" data-edit="price2Num"><span class="currency">€</span>75<span class="period">/mois</span></div>
+        <div class="pricing-desc" data-edit="price2Desc">Pour les passionnés</div>
+        <ul class="pricing-features" data-edit="price2Feat">
+          <li><span class="pricing-check">✓</span> Séances illimitées</li>
+          <li><span class="pricing-check">✓</span> Prépa physique incluse</li>
+          <li><span class="pricing-check">✓</span> Accès Open Mat</li>
+          <li><span class="pricing-check">✓</span> Suivi personnalisé</li>
+          <li><span class="pricing-check">✓</span> Licence fédérale</li>
+        </ul>
+        <button class="btn-primary" style="width:100%;justify-content:center" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Choisir</button>
+      </div>
+      <div class="pricing-card fade-in-up">
+        <div class="pricing-name" data-edit="price3Name">Élite</div>
+        <div class="pricing-price" data-edit="price3Num"><span class="currency">€</span>120<span class="period">/mois</span></div>
+        <div class="pricing-desc" data-edit="price3Desc">Pour les compétiteurs</div>
+        <ul class="pricing-features" data-edit="price3Feat">
+          <li><span class="pricing-check">✓</span> Tout Performance +</li>
+          <li><span class="pricing-check">✓</span> Coaching privé 1h/mois</li>
+          <li><span class="pricing-check">✓</span> Prépa compétition</li>
+          <li><span class="pricing-check">✓</span> Suivi nutritionnel</li>
+          <li><span class="pricing-check">✓</span> Équipement offert</li>
+          <li><span class="pricing-check">✓</span> Vidéo analyse</li>
+        </ul>
+        <button class="btn-primary" style="width:100%;justify-content:center" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Choisir</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <div class="section-divider"></div>
+  <section class="section" id="testimonials">
+    <div class="section-header">
+      <span class="section-label" data-edit="testiLabel">Témoignages</span>
+      <h2 class="section-title" data-edit="testiTitle">Ils Témoignent de Leur <span class="accent">Expérience</span></h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card fade-in-up">
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-text" data-edit="test1Text">"Ce club a transformé ma vie. L'ambiance est incroyable et les entraîneurs sont vraiment à l'écoute."</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">MA</div>
+          <div><div class="testimonial-name" data-edit="test1Name">Mehdi Amrani</div><div class="testimonial-role" data-edit="test1Role">Membre depuis 3 ans</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-in-up">
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-text" data-edit="test2Text">"Mon fils a progressé de manière impressionnante. Les coachs savent motiver les jeunes."</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">LD</div>
+          <div><div class="testimonial-name" data-edit="test2Name">Lucie Dubois</div><div class="testimonial-role" data-edit="test2Role">Parent d'élève</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-in-up">
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-text" data-edit="test3Text">"Grâce à ce club, j'ai pu competir au niveau national. La préparation est rigoureuse."</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">AK</div>
+          <div><div class="testimonial-name" data-edit="test3Name">Amina Khalil</div><div class="testimonial-role" data-edit="test3Role">Compétitrice élite</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vidéos -->
+  <div class="section-divider"></div>
+  <section class="section" id="videos">
+    <div class="section-header">
+      <span class="section-label" data-edit="videosLabel">Vidéos & Entraînements</span>
+      <h2 class="section-title" data-edit="videosTitle">Nos <span class="accent">Vidéos</span> & Entraînements</h2>
+      <p class="section-desc" data-edit="videosDesc">Regardez, apprenez et téléchargez nos séances d'entraînement et démonstrations techniques.</p>
+    </div>
+    <div class="videos-grid" id="videosGrid">
+      <div class="video-card" id="videoCard1">
+        <div class="video-media" id="videoMedia1">
+          <video id="video1Player" controls preload="metadata" playsinline style="width:100%;aspect-ratio:16/9;background:#111;display:block">
+            <source id="video1Source" src="" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-info">
+          <div class="video-title" id="video1Title" data-edit="video1Title">Entraînement — Technique de base</div>
+          <div class="video-desc" id="video1Desc" data-edit="video1Desc">Démonstration des positions fondamentales et des prises essentielles.</div>
+          <a class="video-download" id="video1Download" href="#" style="display:none">⬇️ Télécharger</a>
+        </div>
+      </div>
+      <div class="video-card" id="videoCard2">
+        <div class="video-media" id="videoMedia2">
+          <video id="video2Player" controls preload="metadata" playsinline style="width:100%;aspect-ratio:16/9;background:#111;display:block">
+            <source id="video2Source" src="" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-info">
+          <div class="video-title" id="video2Title" data-edit="video2Title">Séance de Sparring</div>
+          <div class="video-desc" id="video2Desc" data-edit="video2Desc">Analyse des techniques de combat et du travail au sol.</div>
+          <a class="video-download" id="video2Download" href="#" style="display:none">⬇️ Télécharger</a>
+        </div>
+      </div>
+      <div class="video-card" id="videoCard3">
+        <div class="video-media" id="videoMedia3">
+          <video id="video3Player" controls preload="metadata" playsinline style="width:100%;aspect-ratio:16/9;background:#111;display:block">
+            <source id="video3Source" src="" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-info">
+          <div class="video-title" id="video3Title" data-edit="video3Title">Préparation Physique</div>
+          <div class="video-desc" id="video3Desc" data-edit="video3Desc">Programme de renforcement musculaire et de conditionnement.</div>
+          <a class="video-download" id="video3Download" href="#" style="display:none">⬇️ Télécharger</a>
+        </div>
+      </div>
+      <div class="video-card" id="videoCard4" style="display:none">
+        <div class="video-media" id="videoMedia4">
+          <video id="video4Player" controls preload="metadata" playsinline style="width:100%;aspect-ratio:16/9;background:#111;display:block">
+            <source id="video4Source" src="" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-info">
+          <div class="video-title" id="video4Title" data-edit="video4Title">Technique avancée</div>
+          <div class="video-desc" id="video4Desc" data-edit="video4Desc">Techniques de niveau avancé.</div>
+          <a class="video-download" id="video4Download" href="#" style="display:none">⬇️ Télécharger</a>
+        </div>
+      </div>
+      <div class="video-card" id="videoCard5" style="display:none">
+        <div class="video-media" id="videoMedia5">
+          <video id="video5Player" controls preload="metadata" playsinline style="width:100%;aspect-ratio:16/9;background:#111;display:block">
+            <source id="video5Source" src="" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-info">
+          <div class="video-title" id="video5Title" data-edit="video5Title">Compétition</div>
+          <div class="video-desc" id="video5Desc" data-edit="video5Desc">Moments de compétition.</div>
+          <a class="video-download" id="video5Download" href="#" style="display:none">⬇️ Télécharger</a>
+        </div>
+      </div>
+      <div class="video-card" id="videoCard6" style="display:none">
+        <div class="video-media" id="videoMedia6">
+          <video id="video6Player" controls preload="metadata" playsinline style="width:100%;aspect-ratio:16/9;background:#111;display:block">
+            <source id="video6Source" src="" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-info">
+          <div class="video-title" id="video6Title" data-edit="video6Title">Open Mat</div>
+          <div class="video-desc" id="video6Desc" data-edit="video6Desc">Séance libre d'entraînement.</div>
+          <a class="video-download" id="video6Download" href="#" style="display:none">⬇️ Télécharger</a>
+        </div>
+      </div>
+    </div>
+    <p style="text-align:center;color:var(--text-dim);font-size:0.8rem;margin-top:1.5rem" data-edit="videosNote">📁 ⚙️ → Vidéos : fichier MP4 ou lien YouTube, puis Enregistrer tout.</p>
+  </section>
+
+  <!-- Contact -->
+  <div class="section-divider"></div>
+  <section class="section" id="contact">
+    <div class="section-header">
+      <span class="section-label" data-edit="contactLabel">Contact</span>
+      <h2 class="section-title" data-edit="contactTitle">Rejoignez-Nous <span class="accent">Aujourd'hui</span></h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info-card">
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div><div class="contact-label">Adresse</div><div class="contact-value" id="cvAddress" data-edit="cvAddress">123 Rue de la Lutte, 75012 Paris</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div><div class="contact-label">Téléphone</div><div class="contact-value" id="cvPhone" data-edit="cvPhone">+33 1 23 45 67 89</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">✉️</div>
+          <div><div class="contact-label">Email</div><div class="contact-value" id="cvEmail" data-edit="cvEmail">contact@clubdelutte.fr</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🕐</div>
+          <div><div class="contact-label">Horaires Bureau</div><div class="contact-value" data-edit="cvHours">Lun-Ven: 9h-18h</div></div>
+        </div>
+      </div>
+      <div class="contact-form">
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Prénom</label><input class="form-input" type="text" placeholder="Votre prénom"></div>
+          <div class="form-group"><label class="form-label">Nom</label><input class="form-input" type="text" placeholder="Votre nom"></div>
+        </div>
+        <div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" placeholder="votre@email.com"></div>
+        <div class="form-group"><label class="form-label">Message</label><textarea class="form-textarea" placeholder="Votre message..."></textarea></div>
+        <button class="btn-primary" style="width:100%;justify-content:center" onclick="showToast('Message envoyé avec succès!')">Envoyer le message</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem">
+            <div class="nav-logo-icon" style="width:2.5rem;height:2.5rem;font-size:0.9rem">CL</div>
+            <span style="font-weight:700;font-size:1.1rem" data-edit="footerBrand">Club de Lutte</span>
+          </div>
+          <p data-edit="footerTagline">L'excellence de la lutte olympique depuis 2009.</p>
+          <div class="footer-social">
+            <a href="#" title="Facebook">📘</a><a href="#" title="Instagram">📸</a>
+            <a href="#" title="YouTube">▶️</a><a href="#" title="TikTok">🎵</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-title">Navigation</div>
+          <ul class="footer-links">
+            <li><a href="#about">À propos</a></li><li><a href="#programs">Programmes</a></li>
+            <li><a href="#schedule">Horaires</a></li><li><a href="#pricing">Tarifs</a></li>
+            <li><a href="#videos">Vidéos</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-title">Programmes</div>
+          <ul class="footer-links">
+            <li><a href="#">Initiation</a></li><li><a href="#">Perfectionnement</a></li>
+            <li><a href="#">Élite</a></li><li><a href="#">Prépa Physique</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-title">Légal</div>
+          <ul class="footer-links">
+            <li><a href="#">Mentions légales</a></li><li><a href="#">Confidentialité</a></li>
+            <li><a href="#">CGV</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span data-edit="footerCopyright">© 2025 Club de Lutte. Tous droits réservés.</span>
+        <span>Excellence & Tradition 🤼</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Admin FAB -->
+  <button class="admin-fab" id="adminFab" title="Administration">⚙️</button>
+
+  <!-- Login Overlay -->
+  <div class="login-overlay" id="loginOverlay">
+    <div class="login-box">
+      <h2>🔒 Accès Administrateur</h2>
+      <p>Entrez votre mot de passe pour accéder au panneau d'administration.</p>
+      <input type="password" id="loginPassword" placeholder="Mot de passe" onkeydown="if(event.key==='Enter')attemptLogin()">
+      <div class="login-error" id="loginError">❌ Mot de passe incorrect</div>
+      <button class="admin-btn" style="width:100%" onclick="attemptLogin()">Connexion</button>
+      <button class="admin-btn admin-btn-secondary" style="width:100%;margin-top:0.5rem" onclick="closeLogin()">Annuler</button>
+    </div>
+  </div>
+
+  <!-- Admin Overlay -->
+  <div class="admin-overlay" id="adminOverlay">
+    <div class="admin-panel">
+      <button class="admin-close" onclick="closeAdmin()">✕</button>
+      <div class="admin-title">⚙️ Panneau d'Administration</div>
+
+      <div class="cms-toolbar">
+        <button class="admin-btn" onclick="saveAllChanges()">💾 Enregistrer tout</button>
+        <button class="admin-btn" onclick="downloadHTML()">💽 Télécharger le HTML mis à jour</button>
+        <button class="admin-btn admin-btn-secondary" onclick="exportJSON()">⬇️ Exporter (JSON)</button>
+        <button class="admin-btn admin-btn-secondary" onclick="document.getElementById('cmsImportFile').click()">⬆️ Importer (JSON)</button>
+        <input type="file" id="cmsImportFile" accept="application/json,.json" style="display:none" onchange="importJSON(this)">
+        <button class="admin-btn admin-btn-secondary" onclick="resetAllContent()">♻️ Réinitialiser</button>
+        <button class="admin-btn admin-btn-secondary" onclick="closeAdmin()">✕ Fermer</button>
+      </div>
+
+      <div class="cms-note">
+        ℹ️ <b>Comment ça marche :</b> vos modifications sont enregistrées dans <b>ce navigateur</b> (sur cet appareil seulement). Pour qu'elles soient visibles par <b>tous les visiteurs</b>, cliquez sur <b>« 💽 Télécharger le HTML mis à jour »</b> puis remplacez votre ancien fichier sur votre hébergement.
+        <br>💡 Dans les titres, mettez le mot à afficher <b>en rouge</b> entre astérisques&nbsp;: <code>Un Club, Une *Famille*</code>
+      </div>
+
+      <div id="cmsBody"></div>
+
+      <div style="display:none"><div id="galleryAdminFields"></div></div>
+
+      <details class="cms-details">
+        <summary>🔑 Changer le mot de passe</summary>
+        <div class="cms-body-inner">
+          <div class="admin-field">
+            <label>Nouveau mot de passe</label>
+            <input type="password" id="adminNewPassword" placeholder="Nouveau mot de passe">
+          </div>
+          <div class="admin-field">
+            <label>Confirmer</label>
+            <input type="password" id="adminConfirmPassword" placeholder="Confirmer">
+          </div>
+          <button class="admin-btn" onclick="changePassword()">🔑 Appliquer le nouveau mot de passe</button>
+        </div>
+      </details>
+
+      <div class="cms-toolbar" style="margin-top:1rem;margin-bottom:0;border-bottom:none;padding-bottom:0">
+        <button class="admin-btn" onclick="saveAllChanges()">💾 Enregistrer tout</button>
+        <button class="admin-btn admin-btn-secondary" onclick="closeAdmin()">Fermer</button>
+      </div>
+
+<style>
+.cms-toolbar{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px solid var(--border-light)}
+.cms-note{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);border-radius:.6rem;padding:.8rem 1rem;font-size:.78rem;color:var(--text-secondary);line-height:1.65;margin-bottom:1rem}
+.cms-note b{color:var(--text-primary)}
+.cms-note code{background:#000;padding:.15rem .4rem;border-radius:.3rem;font-size:.72rem;color:var(--red-500)}
+.cms-details{border:1px solid var(--border-light);border-radius:.6rem;margin-bottom:.6rem;background:var(--bg-secondary);overflow:hidden}
+.cms-details>summary{cursor:pointer;padding:.8rem 1rem;font-weight:700;font-size:.9rem;list-style:none;background:var(--bg-card);transition:background .2s}
+.cms-details>summary:hover{background:var(--bg-hover)}
+.cms-details>summary::-webkit-details-marker{display:none}
+.cms-details[open]>summary{border-bottom:1px solid var(--border-light)}
+.cms-body-inner{padding:1rem}
+.cms-hint{font-size:.75rem;color:var(--text-dim);margin-bottom:.6rem}
+.sched-row{display:grid;grid-template-columns:1fr 1.1fr 1.4fr 1fr auto;gap:.35rem;margin-bottom:.35rem;align-items:center}
+.sched-row input,.sched-row select{background:var(--bg-primary);border:1px solid var(--border-light);color:var(--text-primary);padding:.45rem .5rem;border-radius:.4rem;font-size:.75rem;font-family:inherit;min-width:0;width:100%}
+.sched-actions{display:flex;gap:.15rem}
+.sched-mini{background:var(--bg-hover);border:none;color:#fff;border-radius:.3rem;padding:.35rem .45rem;cursor:pointer;font-size:.7rem;line-height:1}
+.sched-mini:hover{background:var(--red-600)}
+@media(max-width:640px){.sched-row{grid-template-columns:1fr 1fr}}
+</style>
+
+<script>
+/* =========================================================================
+   FONCTIONS DE BASE DU SITE (menu, animations, connexion, galerie)
+   ========================================================================= */
+window.showToast = function (msg) {
+  var t = document.getElementById('toast');
+  if (!t) return;
+  t.textContent = '✓ ' + msg;
+  t.classList.add('show');
+  setTimeout(function () { t.classList.remove('show'); }, 3000);
+};
+
+window.closeMobileMenu = function () {
+  var tg = document.getElementById('mobileToggle');
+  var mm = document.getElementById('mobileMenu');
+  if (tg) tg.classList.remove('active');
+  if (mm) mm.classList.remove('open');
+};
+
+window.openLightbox = function (el) {
+  var img = el.querySelector('img');
+  if (img) {
+    document.getElementById('lightboxImg').src = img.src;
+    document.getElementById('lightbox').classList.add('open');
+  }
+};
+window.closeLightbox = function () {
+  document.getElementById('lightbox').classList.remove('open');
+};
+
+window.closeAdmin = function () {
+  document.getElementById('adminOverlay').classList.remove('open');
+};
+window.closeLogin = function () {
+  document.getElementById('loginOverlay').classList.remove('open');
+  document.getElementById('loginPassword').value = '';
+  document.getElementById('loginError').style.display = 'none';
+};
+
+(function () {
+  var isLoggedIn = false;
+
+  function getStoredPassword() {
+    return localStorage.getItem('clubAdminPwd') || 'admin123';
+  }
+
+  var fab = document.getElementById('adminFab');
+  if (fab) fab.addEventListener('click', function () {
+    if (isLoggedIn) { window.openAdminPanel(); }
+    else {
+      document.getElementById('loginOverlay').classList.add('open');
+      document.getElementById('loginPassword').focus();
+    }
+  });
+
+  window.attemptLogin = function () {
+    var pwd = document.getElementById('loginPassword').value;
+    if (pwd === getStoredPassword()) {
+      isLoggedIn = true;
+      document.getElementById('loginOverlay').classList.remove('open');
+      document.getElementById('loginPassword').value = '';
+      document.getElementById('loginError').style.display = 'none';
+      window.openAdminPanel();
+      window.showToast('Connexion réussie');
+    } else {
+      document.getElementById('loginError').style.display = 'block';
+      document.getElementById('loginPassword').value = '';
+    }
+  };
+
+  var mt = document.getElementById('mobileToggle');
+  if (mt) mt.addEventListener('click', function () {
+    this.classList.toggle('active');
+    document.getElementById('mobileMenu').classList.toggle('open');
+  });
+
+  window.addEventListener('scroll', function () {
+    var nb = document.getElementById('navbar');
+    if (nb) nb.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  if (typeof IntersectionObserver !== 'undefined') {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.fade-in-up').forEach(function (el) { observer.observe(el); });
+  } else {
+    document.querySelectorAll('.fade-in-up').forEach(function (el) { el.classList.add('visible'); });
+  }
+
+  var lo = document.getElementById('loginOverlay');
+  if (lo) lo.addEventListener('click', function (e) { if (e.target === this) window.closeLogin(); });
+  var ao = document.getElementById('adminOverlay');
+  if (ao) ao.addEventListener('click', function (e) { if (e.target === this) window.closeAdmin(); });
+})();
+
+/* =========================================================================
+   CMS — Panneau d'administration complet
+   ========================================================================= */
+(function () {
+
+  function esc(s) {
+    return String(s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+  function unesc(s) {
+    return String(s)
+      .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+      .replace(/&quot;/g, '"').replace(/&#39;/g, "'");
+  }
+  function innerToEdit(el) {
+    var h = el.innerHTML;
+    h = h.replace(/<br\s*\/?>/gi, '\n');
+    h = h.replace(/<span class="accent">([\s\S]*?)<\/span>/gi, '*$1*');
+    h = h.replace(/<[^>]+>/g, '');
+    return unesc(h).trim();
+  }
+  function editToHtml(v) {
+    var h = esc(v);
+    h = h.replace(/\*([^*\n]+)\*/g, '<span class="accent">$1</span>');
+    h = h.replace(/\n/g, '<br>');
+    return h;
+  }
+
+  var LEVELS = {
+    all:          { label: 'Tous niveaux',  cls: 'level-all' },
+    beginner:     { label: 'Débutant',      cls: 'level-beginner' },
+    intermediate: { label: 'Intermédiaire', cls: 'level-intermediate' },
+    advanced:     { label: 'Avancé',        cls: 'level-advanced' }
+  };
+  var DAYS = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
+  var GAL_LABELS = ['Entraînement','Compétition','Préparation','Victoire',"Esprit d'équipe",'Musculation','Récupération','Événements'];
+
+  /* ---------------- SCHÉMA ---------------- */
+  var SCHEMA = [];
+
+  SCHEMA.push({ title: '🌐 Général & Navigation', fields: [
+    { key: 'siteName',    label: 'Nom du club (en haut à gauche)', type: 'text' },
+    { key: 'navAbout',    label: 'Menu 1 — À propos',    type: 'text' },
+    { key: 'navPrograms', label: 'Menu 2 — Programmes',  type: 'text' },
+    { key: 'navCoaches',  label: 'Menu 3 — Entraîneurs', type: 'text' },
+    { key: 'navSchedule', label: 'Menu 4 — Horaires',    type: 'text' },
+    { key: 'navPricing',  label: 'Menu 5 — Tarifs',      type: 'text' },
+    { key: 'navContact',  label: 'Menu 6 — Contact',     type: 'text' },
+    { key: 'navVideos',   label: 'Menu 7 — Vidéos',      type: 'text' },
+    { key: 'navGallery',  label: 'Menu mobile — Galerie',type: 'text' },
+    { key: 'navCta',      label: 'Bouton « S\'inscrire »', type: 'text' }
+  ]});
+
+  SCHEMA.push({ title: '🏠 Section Hero (haut de page)', fields: [
+    { key: 'heroBadge',    label: 'Bandeau rouge (ex: Inscriptions ouvertes 2025-2026)', type: 'text' },
+    { key: 'heroTitle',    label: 'Titre principal (retour à la ligne autorisé)', type: 'html' },
+    { key: 'heroSubtitle', label: 'Sous-titre', type: 'textarea' },
+    { key: 'stat1',      label: 'Chiffre 1', type: 'text' },
+    { key: 'stat1Label', label: 'Légende chiffre 1', type: 'text' },
+    { key: 'stat2',      label: 'Chiffre 2', type: 'text' },
+    { key: 'stat2Label', label: 'Légende chiffre 2', type: 'text' },
+    { key: 'stat3',      label: 'Chiffre 3', type: 'text' },
+    { key: 'stat3Label', label: 'Légende chiffre 3', type: 'text' }
+  ]});
+
+  SCHEMA.push({ title: 'ℹ️ Section À propos', fields: [
+    { key: 'aboutLabel',   label: 'Petit label au-dessus du titre', type: 'text' },
+    { key: 'aboutTitle',   label: 'Titre', type: 'html' },
+    { key: 'aboutDesc',    label: 'Texte sous le titre', type: 'textarea' },
+    { key: 'aboutH3',      label: 'Sous-titre (à droite)', type: 'text' },
+    { key: 'aboutP1',      label: 'Paragraphe 1', type: 'textarea' },
+    { key: 'aboutP2',      label: 'Paragraphe 2', type: 'textarea' },
+    { key: 'aboutImgLabel',label: 'Texte affiché sur l\'image', type: 'text' },
+    { key: 'aboutFeat1',   label: 'Point fort 1', type: 'text' },
+    { key: 'aboutFeat2',   label: 'Point fort 2', type: 'text' },
+    { key: 'aboutFeat3',   label: 'Point fort 3', type: 'text' },
+    { key: 'aboutFeat4',   label: 'Point fort 4', type: 'text' }
+  ]});
+
+  var progFields = [
+    { key: 'programsLabel', label: 'Petit label au-dessus du titre', type: 'text' },
+    { key: 'programsTitle', label: 'Titre', type: 'html' },
+    { key: 'programsDesc',  label: 'Texte sous le titre', type: 'textarea' }
+  ];
+  for (var p = 1; p <= 6; p++) {
+    progFields.push({ key: 'prog' + p + 'Name',  label: 'Programme ' + p + ' — Nom', type: 'text' });
+    progFields.push({ key: 'prog' + p + 'Desc',  label: 'Programme ' + p + ' — Description', type: 'textarea' });
+    progFields.push({ key: 'prog' + p + 'Meta',  label: 'Programme ' + p + ' — Infos (durée | fréquence | public)', type: 'meta' });
+    progFields.push({ key: 'prog' + p + 'Price', label: 'Programme ' + p + ' — Prix (nombre)', type: 'price' });
+  }
+  SCHEMA.push({ title: '🤼 Section Programmes', fields: progFields });
+
+  var coachFields = [
+    { key: 'coachesLabel', label: 'Petit label au-dessus du titre', type: 'text' },
+    { key: 'coachesTitle', label: 'Titre', type: 'html' }
+  ];
+  for (var c = 1; c <= 3; c++) {
+    coachFields.push({ key: 'coach' + c + 'Name',  label: 'Entraîneur ' + c + ' — Nom', type: 'text' });
+    coachFields.push({ key: 'coach' + c + 'Role',  label: 'Entraîneur ' + c + ' — Rôle', type: 'text' });
+    coachFields.push({ key: 'coach' + c + 'Bio',   label: 'Entraîneur ' + c + ' — Présentation', type: 'textarea' });
+    coachFields.push({ key: 'coach' + c + 'Badge', label: 'Entraîneur ' + c + ' — Badge', type: 'text' });
+  }
+  SCHEMA.push({ title: '👨‍🏫 Section Entraîneurs', fields: coachFields });
+
+  SCHEMA.push({ title: '🕐 Section Horaires d\'entraînement', fields: [
+    { key: 'scheduleLabel', label: 'Petit label au-dessus du titre', type: 'text' },
+    { key: 'scheduleTitle', label: 'Titre', type: 'html' }
+  ], special: 'schedule' });
+
+  var galFields = [
+    { key: 'galleryLabel', label: 'Petit label au-dessus du titre', type: 'text' },
+    { key: 'galleryTitle', label: 'Titre', type: 'html' }
+  ];
+  for (var g = 1; g <= 8; g++) {
+    galFields.push({ key: 'gal' + g + 'Label', label: 'Photo ' + g + ' — Légende', type: 'text' });
+  }
+  SCHEMA.push({ title: '🖼️ Section Galerie', fields: galFields });
+
+  var priceFields = [
+    { key: 'pricingLabel', label: 'Petit label au-dessus du titre', type: 'text' },
+    { key: 'pricingTitle', label: 'Titre', type: 'html' }
+  ];
+  for (var q = 1; q <= 3; q++) {
+    priceFields.push({ key: 'price' + q + 'Name', label: 'Formule ' + q + ' — Nom', type: 'text' });
+    priceFields.push({ key: 'price' + q + 'Num',  label: 'Formule ' + q + ' — Prix (nombre)', type: 'text' });
+    priceFields.push({ key: 'price' + q + 'Desc', label: 'Formule ' + q + ' — Sous-titre', type: 'text' });
+    priceFields.push({ key: 'price' + q + 'Feat', label: 'Formule ' + q + ' — Avantages (un par ligne)', type: 'list' });
+  }
+  SCHEMA.push({ title: '💳 Section Tarifs', fields: priceFields });
+
+  var testiFields = [
+    { key: 'testiLabel', label: 'Petit label au-dessus du titre', type: 'text' },
+    { key: 'testiTitle', label: 'Titre', type: 'html' }
+  ];
+  for (var t = 1; t <= 3; t++) {
+    testiFields.push({ key: 'test' + t + 'Text', label: 'Avis ' + t + ' — Texte', type: 'textarea' });
+    testiFields.push({ key: 'test' + t + 'Name', label: 'Avis ' + t + ' — Nom', type: 'text' });
+    testiFields.push({ key: 'test' + t + 'Role', label: 'Avis ' + t + ' — Statut', type: 'text' });
+  }
+  SCHEMA.push({ title: '💬 Section Témoignages', fields: testiFields });
+
+  var MAX_VIDEOS = 9;
+  var videoFields = [
+    { key: 'videosLabel', label: 'Petit label au-dessus du titre', type: 'text' },
+    { key: 'videosTitle', label: 'Titre', type: 'html' },
+    { key: 'videosDesc',  label: 'Texte sous le titre', type: 'textarea' },
+    { key: 'videosNote',  label: 'Petit message en bas de section', type: 'text' },
+    { key: 'videoCount',  label: 'Nombre de vidéos affichées (1 à 6)', type: 'text' }
+  ];
+  for (var v = 1; v <= MAX_VIDEOS; v++) {
+    videoFields.push({ key: 'video' + v + 'Title', label: 'Vidéo ' + v + ' — Titre', type: 'text' });
+    videoFields.push({ key: 'video' + v + 'Desc',  label: 'Vidéo ' + v + ' — Description', type: 'textarea' });
+    videoFields.push({ key: 'video' + v + 'Url',   label: 'Vidéo ' + v + ' — Lien alternatif (URL optionnelle)', type: 'videoUrl', videoIndex: v });
+  }
+  SCHEMA.push({ title: '🎬 Section Vidéos & Entraînements', fields: videoFields, special: 'videos' });
+
+  SCHEMA.push({ title: '📞 Section Contact', fields: [
+    { key: 'contactLabel', label: 'Petit label au-dessus du titre', type: 'text' },
+    { key: 'contactTitle', label: 'Titre', type: 'html' },
+    { key: 'cvAddress', label: 'Adresse', type: 'text' },
+    { key: 'cvPhone',   label: 'Téléphone', type: 'text' },
+    { key: 'cvEmail',   label: 'Email', type: 'text' },
+    { key: 'cvHours',   label: 'Horaires du bureau', type: 'text' }
+  ]});
+
+  SCHEMA.push({ title: '🔻 Pied de page', fields: [
+    { key: 'footerBrand',     label: 'Nom du club', type: 'text' },
+    { key: 'footerTagline',   label: 'Slogan', type: 'text' },
+    { key: 'footerCopyright', label: 'Mention de copyright', type: 'text' }
+  ]});
+
+  var ALLFIELDS = [];
+  SCHEMA.forEach(function (s) { s.fields.forEach(function (f) { ALLFIELDS.push(f); }); });
+
+  var IMAGE_KEYS = [
+    { key: 'logo',     label: 'Logo du club (rond, en haut à gauche)' },
+    { key: 'heroBg',   label: 'Image d\'arrière-plan du Hero' },
+    { key: 'aboutImg', label: 'Image de la section À propos' },
+    { key: 'coach1',   label: 'Photo entraîneur 1' },
+    { key: 'coach2',   label: 'Photo entraîneur 2' },
+    { key: 'coach3',   label: 'Photo entraîneur 3' }
+  ];
+  for (var gi = 0; gi < 8; gi++) {
+    IMAGE_KEYS.push({ key: 'gallery' + gi, label: 'Galerie — photo ' + (gi + 1) + ' (' + GAL_LABELS[gi] + ')' });
+  }
+
+  var VIDEO_KEYS = [];
+  for (var vi = 1; vi <= MAX_VIDEOS; vi++) {
+    VIDEO_KEYS.push({ key: 'video' + vi, label: 'Vidéo ' + vi + ' — Fichier vidéo (MP4 recommandé, max ~10 Mo)' });
+  }
+
+  var DEFAULT_LOGO = '';
+  var navLogoEl = document.getElementById('navLogoIcon');
+  if (navLogoEl) DEFAULT_LOGO = navLogoEl.innerHTML;
+
+  var pendingImages = {};
+  var pendingVideos = {};
+  var scheduleData = [];
+  var built = false;
+
+  /* ---------------- IndexedDB pour vidéos (persiste après refresh) ---------------- */
+  var IDB_NAME = 'ClubLutteVideos';
+  var IDB_STORE = 'videos';
+
+  function idbOpen() {
+    return new Promise(function (resolve, reject) {
+      try {
+        var req = indexedDB.open(IDB_NAME, 1);
+        req.onupgradeneeded = function (e) {
+          var db = e.target.result;
+          if (!db.objectStoreNames.contains(IDB_STORE)) {
+            db.createObjectStore(IDB_STORE);
+          }
+        };
+        req.onsuccess = function (e) { resolve(e.target.result); };
+        req.onerror = function (e) { reject(e.target.error); };
+      } catch (err) { reject(err); }
+    });
+  }
+
+  function idbSet(key, value) {
+    return idbOpen().then(function (db) {
+      return new Promise(function (resolve, reject) {
+        var tx = db.transaction(IDB_STORE, 'readwrite');
+        tx.objectStore(IDB_STORE).put(value, key);
+        tx.oncomplete = function () { resolve(true); };
+        tx.onerror = function (e) { reject(e.target.error); };
+      });
+    }).catch(function () { return false; });
+  }
+
+  function idbGet(key) {
+    return idbOpen().then(function (db) {
+      return new Promise(function (resolve, reject) {
+        var tx = db.transaction(IDB_STORE, 'readonly');
+        var req = tx.objectStore(IDB_STORE).get(key);
+        req.onsuccess = function () { resolve(req.result || null); };
+        req.onerror = function (e) { reject(e.target.error); };
+      });
+    }).catch(function () { return null; });
+  }
+
+  function idbDelete(key) {
+    return idbOpen().then(function (db) {
+      return new Promise(function (resolve) {
+        var tx = db.transaction(IDB_STORE, 'readwrite');
+        tx.objectStore(IDB_STORE).delete(key);
+        tx.oncomplete = function () { resolve(true); };
+        tx.onerror = function () { resolve(false); };
+      });
+    }).catch(function () { return false; });
+  }
+
+  function idbGetAllVideos() {
+    return idbOpen().then(function (db) {
+      return new Promise(function (resolve) {
+        var out = {};
+        try {
+          var tx = db.transaction(IDB_STORE, 'readonly');
+          var store = tx.objectStore(IDB_STORE);
+          var req = store.openCursor();
+          req.onsuccess = function (e) {
+            var cursor = e.target.result;
+            if (cursor) {
+              out[cursor.key] = cursor.value;
+              cursor.continue();
+            } else {
+              resolve(out);
+            }
+          };
+          req.onerror = function () { resolve(out); };
+        } catch (err) {
+          resolve(out);
+        }
+      });
+    }).catch(function () { return {}; });
+  }
+
+  /* ---------------- LECTURE / ÉCRITURE ---------------- */
+  function readCurrent(f) {
+    if (f.type === 'videoUrl') {
+      var s = document.getElementById('video' + f.videoIndex + 'Source');
+      return s ? (s.getAttribute('src') || '') : '';
+    }
+    var el = document.querySelector('[data-edit="' + f.key + '"]');
+    if (!el) return '';
+    if (f.type === 'html') return innerToEdit(el);
+    if (f.type === 'price') {
+      var m = el.textContent.match(/[\d]+(?:[.,]\d+)?/);
+      return m ? m[0] : el.textContent.trim();
+    }
+    if (f.type === 'meta') {
+      return Array.prototype.map.call(el.querySelectorAll('span'), function (s) { return s.textContent.trim(); }).join(' | ');
+    }
+    if (f.type === 'list') {
+      return Array.prototype.map.call(el.querySelectorAll('li'), function (li) {
+        return li.textContent.replace('✓', '').trim();
+      }).join('\n');
+    }
+    return el.textContent.trim();
+  }
+
+  function setField(f, val) {
+    if (val === undefined || val === null) return;
+    if (f.type === 'videoUrl') {
+      // Les URLs (YouTube ou fichier) sont appliquées via renderVideosGrid
+      return;
+    }
+    var el = document.querySelector('[data-edit="' + f.key + '"]');
+    if (!el) return;
+    if (f.type === 'html') el.innerHTML = editToHtml(val);
+    else if (f.type === 'price') el.innerHTML = esc(val) + '€ <small>/mois</small>';
+    else if (f.type === 'meta') {
+      el.innerHTML = String(val).split('|').map(function (part) {
+        return '<span>' + esc(part.trim()) + '</span>';
+      }).join('');
+    } else if (f.type === 'list') {
+      el.innerHTML = String(val).split('\n').map(function (x) { return x.trim(); })
+        .filter(function (x) { return x.length; })
+        .map(function (x) { return '<li><span class="pricing-check">✓</span> ' + esc(x) + '</li>'; }).join('');
+    } else el.textContent = val;
+  }
+
+  /* ---------------- HORAIRES ---------------- */
+  function seedSchedule() {
+    var table = document.querySelector('#schedule .schedule-table');
+    if (!table) return [];
+    return Array.prototype.map.call(table.querySelectorAll('.schedule-row'), function (r) {
+      var lvl = r.querySelector('.schedule-level');
+      var level = 'all';
+      if (lvl) {
+        if (lvl.classList.contains('level-beginner')) level = 'beginner';
+        else if (lvl.classList.contains('level-intermediate')) level = 'intermediate';
+        else if (lvl.classList.contains('level-advanced')) level = 'advanced';
+      }
+      var d = r.querySelector('.schedule-day'), tm = r.querySelector('.schedule-time'), ty = r.querySelector('.schedule-type');
+      return { day: d ? d.textContent.trim() : '', time: tm ? tm.textContent.trim() : '', type: ty ? ty.textContent.trim() : '', level: level };
+    });
+  }
+
+  function applySchedule(arr) {
+    var table = document.querySelector('#schedule .schedule-table');
+    if (!table) return;
+    Array.prototype.forEach.call(table.querySelectorAll('.schedule-row'), function (r) { r.remove(); });
+    (arr || []).forEach(function (row) {
+      var lv = LEVELS[row.level] || LEVELS.all;
+      var div = document.createElement('div');
+      div.className = 'schedule-row';
+      div.innerHTML =
+        '<span class="schedule-day">' + esc(row.day || '') + '</span>' +
+        '<span class="schedule-time">' + esc(row.time || '') + '</span>' +
+        '<span class="schedule-type">' + esc(row.type || '') + '</span>' +
+        '<span><span class="schedule-level ' + lv.cls + '">' + lv.label + '</span></span>';
+      table.appendChild(div);
+    });
+  }
+
+  function syncSchedule() {
+    var rows = document.querySelectorAll('#cmsSchedule .sched-row');
+    var out = [];
+    Array.prototype.forEach.call(rows, function (r) {
+      out.push({
+        day: r.querySelector('[data-f="day"]').value,
+        time: r.querySelector('[data-f="time"]').value,
+        type: r.querySelector('[data-f="type"]').value,
+        level: r.querySelector('[data-f="level"]').value
+      });
+    });
+    scheduleData = out;
+  }
+
+  function renderScheduleEditor() {
+    var box = document.getElementById('cmsSchedule');
+    if (!box) return;
+    var html = '<div class="cms-hint">Ajoutez, modifiez, réorganisez ou supprimez les créneaux d\'entraînement.</div>';
+    scheduleData.forEach(function (row, i) {
+      html += '<div class="sched-row">' +
+        '<input type="text" data-i="' + i + '" data-f="day" list="daysList" value="' + esc(row.day || '') + '" placeholder="Jour">' +
+        '<input type="text" data-i="' + i + '" data-f="time" value="' + esc(row.time || '') + '" placeholder="18h00 - 20h00">' +
+        '<input type="text" data-i="' + i + '" data-f="type" value="' + esc(row.type || '') + '" placeholder="Type de séance">' +
+        '<select data-i="' + i + '" data-f="level">' +
+          Object.keys(LEVELS).map(function (k) {
+            return '<option value="' + k + '"' + (row.level === k ? ' selected' : '') + '>' + LEVELS[k].label + '</option>';
+          }).join('') +
+        '</select>' +
+        '<span class="sched-actions">' +
+          '<button class="sched-mini" onclick="schedMove(' + i + ',-1)" title="Monter">▲</button>' +
+          '<button class="sched-mini" onclick="schedMove(' + i + ',1)" title="Descendre">▼</button>' +
+          '<button class="sched-mini" onclick="schedDelete(' + i + ')" title="Supprimer">🗑️</button>' +
+        '</span>' +
+      '</div>';
+    });
+    html += '<button class="admin-btn admin-btn-secondary" style="margin-top:.5rem" onclick="schedAdd()">➕ Ajouter un créneau</button>';
+    html += '<datalist id="daysList">' + DAYS.map(function (d) { return '<option value="' + d + '">'; }).join('') + '</datalist>';
+    box.innerHTML = html;
+  }
+
+  window.schedAdd = function () {
+    syncSchedule();
+    scheduleData.push({ day: 'Lundi', time: '', type: '', level: 'all' });
+    renderScheduleEditor();
+  };
+  window.schedDelete = function (i) {
+    syncSchedule();
+    scheduleData.splice(i, 1);
+    renderScheduleEditor();
+  };
+  window.schedMove = function (i, dir) {
+    syncSchedule();
+    var j = i + dir;
+    if (j < 0 || j >= scheduleData.length) return;
+    var tmp = scheduleData[i];
+    scheduleData[i] = scheduleData[j];
+    scheduleData[j] = tmp;
+    renderScheduleEditor();
+  };
+
+  /* ---------------- CONSTRUCTION DU PANNEAU ---------------- */
+  function buildCms() {
+    if (built) return;
+    var body = document.getElementById('cmsBody');
+    var html = '';
+    SCHEMA.forEach(function (sec, si) {
+      html += '<details class="cms-details"' + (si === 0 ? ' open' : '') + '><summary>' + sec.title + '</summary><div class="cms-body-inner">';
+      sec.fields.forEach(function (f) {
+        html += '<div class="admin-field"><label>' + f.label + '</label>';
+        if (f.type === 'textarea' || f.type === 'html' || f.type === 'list') {
+          html += '<textarea rows="' + (f.type === 'html' ? 2 : 3) + '" id="cms_' + f.key + '"></textarea>';
+        } else {
+          html += '<input type="text" id="cms_' + f.key + '">';
+        }
+        html += '</div>';
+      });
+      if (sec.special === 'schedule') html += '<div id="cmsSchedule"></div>';
+      if (sec.special === 'videos') {
+        html += '<div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border-light)">';
+        html += '<p class="cms-hint" style="margin-bottom:0.75rem">📤 <b>Téléverser des fichiers vidéo</b> (MP4 recommandé, max ~10–15 Mo).<br>1) Réglez le <b>nombre de vidéos</b> (1 à 9) ci-dessus<br>2) Choisissez un fichier pour chaque emplacement<br>3) Cliquez <b>Enregistrer tout</b><br>4) Cliquez <b>Télécharger le HTML</b> pour que les visiteurs voient les vidéos</p>';
+        VIDEO_KEYS.forEach(function (vk) {
+          html += '<div class="admin-image-field" style="margin-bottom:1.25rem">' +
+            '<label>' + vk.label + '</label>' +
+            '<div style="margin:0.4rem 0"><video id="prevvid_' + vk.key + '" controls style="max-width:100%;max-height:160px;border-radius:0.5rem;display:none;background:#000"></video></div>' +
+            '<div class="admin-image-upload">' +
+              '<input type="file" accept="video/mp4,video/webm,video/ogg,video/*" id="filevid_' + vk.key + '" data-vidkey="' + vk.key + '" onchange="cmsVideoPick(this)">' +
+              '<label class="admin-image-btn" for="filevid_' + vk.key + '">📁 Choisir un fichier vidéo</label>' +
+              '<button class="admin-image-remove" onclick="cmsVideoRemove(\'' + vk.key + '\')">🗑️ Supprimer</button>' +
+              '<span class="admin-image-name" id="vname_' + vk.key + '"></span>' +
+            '</div></div>';
+        });
+        html += '</div>';
+      }
+      html += '</div></details>';
+    });
+    html += '<details class="cms-details"><summary>📷 Images &amp; logo</summary><div class="cms-body-inner">';
+    IMAGE_KEYS.forEach(function (im) {
+      html += '<div class="admin-image-field"><label>' + im.label + '</label>' +
+        '<img class="admin-image-preview" id="prev_' + im.key + '">' +
+        '<div class="admin-image-upload">' +
+          '<input type="file" accept="image/*" id="fileimg_' + im.key + '" data-imgkey="' + im.key + '" onchange="cmsImgPick(this)">' +
+          '<label class="admin-image-btn" for="fileimg_' + im.key + '">📁 Choisir</label>' +
+          '<button class="admin-image-remove" onclick="cmsImgRemove(\'' + im.key + '\')">🗑️</button>' +
+          '<span class="admin-image-name" id="name_' + im.key + '"></span>' +
+        '</div></div>';
+    });
+    html += '</div></details>';
+    body.innerHTML = html;
+    built = true;
+  }
+
+  function cmsLoadValues() {
+    var data = {};
+    try { data = JSON.parse(localStorage.getItem('clubData') || '{}'); } catch (e) { data = {}; }
+    ALLFIELDS.forEach(function (f) {
+      var el = document.getElementById('cms_' + f.key);
+      if (!el) return;
+      var v = (data[f.key] !== undefined && data[f.key] !== '') ? data[f.key] : readCurrent(f);
+      if (f.key === 'videoCount' && (!v || v === '')) v = '3';
+      // Defaults for video titles if empty
+      if (f.key.match(/^video\d+Title$/) && (!v || v === '')) {
+        var num = parseInt(f.key.replace(/\D/g, ''), 10);
+        v = DEFAULT_VIDEO_TITLES[num] || ('Vidéo ' + num);
+      }
+      if (f.key.match(/^video\d+Desc$/) && (!v || v === '')) {
+        var num2 = parseInt(f.key.replace(/\D/g, ''), 10);
+        v = DEFAULT_VIDEO_DESCS[num2] || '';
+      }
+      el.value = v;
+    });
+    scheduleData = (data.schedule && data.schedule.length) ? data.schedule : seedSchedule();
+    renderScheduleEditor();
+    IMAGE_KEYS.forEach(function (im) {
+      var src = localStorage.getItem('clubImg_' + im.key);
+      var prev = document.getElementById('prev_' + im.key);
+      if (prev) {
+        if (src && src !== 'REMOVE') { prev.src = src; prev.classList.add('visible'); }
+        else { prev.src = ''; prev.classList.remove('visible'); }
+      }
+    });
+    pendingImages = {};
+    pendingVideos = {};
+    VIDEO_KEYS.forEach(function (vk) {
+      var src = localStorage.getItem('clubVid_' + vk.key);
+      var prev = document.getElementById('prevvid_' + vk.key);
+      var nm = document.getElementById('vname_' + vk.key);
+      if (prev) {
+        if (src && src !== 'REMOVE') {
+          prev.src = src;
+          prev.style.display = 'block';
+          if (nm) nm.textContent = 'Vidéo enregistrée ✓';
+        } else {
+          prev.removeAttribute('src');
+          prev.style.display = 'none';
+          if (nm) nm.textContent = '';
+        }
+      }
+    });
+  }
+
+  /* ---------------- IMAGES ---------------- */
+  function cmsImgPick(input) {
+    var file = input.files[0];
+    if (!file) return;
+    var key = input.getAttribute('data-imgkey');
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      var img = new Image();
+      img.onload = function () {
+        var canvas = document.createElement('canvas');
+        var maxW = 1400, maxH = 1100;
+        var w = img.width, h = img.height;
+        if (w > maxW) { h = h * maxW / w; w = maxW; }
+        if (h > maxH) { w = w * maxH / h; h = maxH; }
+        canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        var dataUrl = canvas.toDataURL('image/jpeg', 0.8);
+        pendingImages[key] = dataUrl;
+        var prev = document.getElementById('prev_' + key);
+        if (prev) { prev.src = dataUrl; prev.classList.add('visible'); }
+        var nm = document.getElementById('name_' + key);
+        if (nm) nm.textContent = file.name;
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+  window.cmsImgPick = cmsImgPick;
+
+  function cmsImgRemove(key) {
+    pendingImages[key] = 'REMOVE';
+    var prev = document.getElementById('prev_' + key);
+    if (prev) { prev.src = ''; prev.classList.remove('visible'); }
+    var nm = document.getElementById('name_' + key);
+    if (nm) nm.textContent = '';
+  }
+  window.cmsImgRemove = cmsImgRemove;
+
+  /* ---------------- VIDÉOS (upload fichier) ---------------- */
+  function cmsVideoPick(input) {
+    var file = input.files[0];
+    if (!file) return;
+    var key = input.getAttribute('data-vidkey');
+    var maxBytes = 25 * 1024 * 1024; // ~25 Mo
+    if (file.size > maxBytes) {
+      window.showToast('Vidéo trop lourde (>' + (maxBytes/1024/1024) + ' Mo). Compressez-la ou mettez un lien URL.');
+      input.value = '';
+      return;
+    }
+    window.showToast('Chargement de la vidéo en cours…');
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      var dataUrl = e.target.result;
+      pendingVideos[key] = dataUrl;
+      window['_sessionVid_' + key] = dataUrl;
+
+      // Sauvegarde durable (IndexedDB) — survit au refresh
+      idbSet(key, dataUrl).then(function (ok) {
+        if (ok) {
+          window.showToast('Vidéo enregistrée durablement ✓ (reste après refresh)');
+        } else {
+          window.showToast('Vidéo affichée — si elle disparaît au refresh, utilisez un lien YouTube');
+        }
+      });
+      // Essai localStorage en complément (petites vidéos)
+      try { localStorage.setItem('clubVid_' + key, dataUrl); } catch (err) {}
+
+      var prev = document.getElementById('prevvid_' + key);
+      if (prev) {
+        prev.src = dataUrl;
+        prev.style.display = 'block';
+      }
+      var nm = document.getElementById('vname_' + key);
+      if (nm) nm.textContent = file.name + ' (' + (file.size / 1024 / 1024).toFixed(1) + ' Mo) ✓';
+
+      var n = parseInt(key.replace(/\D/g, ''), 10);
+      var currentCount = getVideoCount();
+      if (n > currentCount) {
+        var countEl = document.getElementById('cms_videoCount');
+        if (countEl) countEl.value = String(n);
+        try {
+          var d = JSON.parse(localStorage.getItem('clubData') || '{}');
+          d.videoCount = String(n);
+          localStorage.setItem('clubData', JSON.stringify(d));
+        } catch (e2) {}
+      }
+
+      applyVideo(key, dataUrl);
+      renderVideosGrid();
+    };
+    reader.onerror = function () {
+      window.showToast('Erreur de lecture du fichier vidéo');
+    };
+    reader.readAsDataURL(file);
+  }
+  window.cmsVideoPick = cmsVideoPick;
+
+  function cmsVideoRemove(key) {
+    pendingVideos[key] = 'REMOVE';
+    window['_sessionVid_' + key] = null;
+    try { localStorage.removeItem('clubVid_' + key); } catch (e) {}
+    idbDelete(key);
+    var prev = document.getElementById('prevvid_' + key);
+    if (prev) {
+      prev.removeAttribute('src');
+      prev.style.display = 'none';
+    }
+    var nm = document.getElementById('vname_' + key);
+    if (nm) nm.textContent = '';
+    applyVideo(key, '');
+  }
+  window.cmsVideoRemove = cmsVideoRemove;
+
+  function applyVideo(key, src) {
+    var n = parseInt(String(key).replace(/\D/g, ''), 10);
+    if (!n) return;
+    applyVideoSource(n, src || '');
+  }
+
+  var DEFAULT_VIDEO_TITLES = {
+    1: 'Entraînement — Technique de base',
+    2: 'Séance de Sparring',
+    3: 'Préparation Physique',
+    4: 'Technique avancée',
+    5: 'Compétition',
+    6: 'Open Mat',
+    7: 'Récupération',
+    8: 'Démonstration',
+    9: 'Séance spéciale'
+  };
+  var DEFAULT_VIDEO_DESCS = {
+    1: 'Démonstration des positions fondamentales et des prises essentielles.',
+    2: 'Analyse des techniques de combat et du travail au sol.',
+    3: 'Programme de renforcement musculaire et de conditionnement.',
+    4: 'Techniques de niveau avancé.',
+    5: 'Moments de compétition.',
+    6: 'Séance libre d\'entraînement.',
+    7: 'Exercices de récupération et mobilité.',
+    8: 'Démonstration technique.',
+    9: 'Séance spéciale du club.'
+  };
+
+  function getVideoCount() {
+    try {
+      var el = document.getElementById('cms_videoCount');
+      var fromCms = el ? parseInt(el.value, 10) : NaN;
+      if (!isNaN(fromCms) && fromCms >= 1 && fromCms <= MAX_VIDEOS) return fromCms;
+    } catch (e) {}
+    try {
+      var data = JSON.parse(localStorage.getItem('clubData') || '{}');
+      var n = parseInt(data.videoCount, 10);
+      if (!isNaN(n) && n >= 1 && n <= MAX_VIDEOS) return n;
+    } catch (e) {}
+    return 3; // toujours au moins 3 emplacements visibles
+  }
+
+  function extractYoutubeId(url) {
+    if (!url || typeof url !== 'string') return null;
+    var m = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([A-Za-z0-9_-]{6,})/);
+    return m ? m[1] : null;
+  }
+
+  function isYoutubeUrl(url) {
+    return !!extractYoutubeId(url);
+  }
+
+  function renderVideosGrid() {
+    // Cartes HTML fixes (1..6) — on affiche/masque seulement, on ne recrée pas le DOM
+    var count = getVideoCount();
+    if (!count || count < 1) count = 3;
+    if (count > 6) count = 6;
+
+    var data = {};
+    try { data = JSON.parse(localStorage.getItem('clubData') || '{}'); } catch (e) {}
+
+    for (var i = 1; i <= 6; i++) {
+      var card = document.getElementById('videoCard' + i);
+      if (!card) continue;
+      card.style.display = (i <= count) ? '' : 'none';
+
+      // Titres / descriptions
+      var titleEl = document.getElementById('video' + i + 'Title');
+      var descEl = document.getElementById('video' + i + 'Desc');
+      if (titleEl && data['video' + i + 'Title']) titleEl.textContent = data['video' + i + 'Title'];
+      if (descEl && data['video' + i + 'Desc']) descEl.textContent = data['video' + i + 'Desc'];
+
+      // Source
+      var src = '';
+      try { src = localStorage.getItem('clubVid_video' + i) || ''; } catch (e) {}
+      if (src === 'REMOVE') src = '';
+      if (!src && window['_sessionVid_video' + i]) src = window['_sessionVid_video' + i];
+      if (!src && typeof pendingVideos !== 'undefined' && pendingVideos['video' + i] && pendingVideos['video' + i] !== 'REMOVE') {
+        src = pendingVideos['video' + i];
+      }
+      if (!src && data['video' + i + 'Url']) src = data['video' + i + 'Url'];
+
+      applyVideoSource(i, src);
+    }
+  }
+
+  function applyVideoSource(i, src) {
+    var media = document.getElementById('videoMedia' + i);
+    var dl = document.getElementById('video' + i + 'Download');
+    if (!media) return;
+
+    var ytId = extractYoutubeId(src || '');
+
+    if (ytId) {
+      // YouTube iframe
+      media.innerHTML =
+        '<iframe id="video' + i + 'Player" src="https://www.youtube.com/embed/' + ytId + '" ' +
+        'style="width:100%;aspect-ratio:16/9;border:0;display:block;background:#000" ' +
+        'allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen loading="lazy"></iframe>' +
+        '<source id="video' + i + 'Source" src="" style="display:none">';
+      if (dl) {
+        dl.href = src;
+        dl.target = '_blank';
+        dl.textContent = '▶️ Voir sur YouTube';
+        dl.style.display = '';
+        dl.removeAttribute('download');
+      }
+    } else if (src) {
+      // Fichier local / data-URL
+      media.innerHTML =
+        '<video id="video' + i + 'Player" controls preload="metadata" playsinline style="width:100%;aspect-ratio:16/9;background:#111;display:block">' +
+          '<source id="video' + i + 'Source" src="" type="video/mp4">' +
+        '</video>';
+      var player = document.getElementById('video' + i + 'Player');
+      var source = document.getElementById('video' + i + 'Source');
+      if (source) source.setAttribute('src', src);
+      if (player) {
+        try { player.src = src; player.load(); } catch (e) {}
+      }
+      if (dl) {
+        dl.href = src;
+        dl.setAttribute('download', 'video-' + i + '.mp4');
+        dl.textContent = '⬇️ Télécharger';
+        dl.style.display = '';
+        dl.removeAttribute('target');
+      }
+    } else {
+      // Vide
+      media.innerHTML =
+        '<video id="video' + i + 'Player" controls preload="metadata" playsinline style="width:100%;aspect-ratio:16/9;background:#111;display:block">' +
+          '<source id="video' + i + 'Source" src="" type="video/mp4">' +
+        '</video>';
+      if (dl) dl.style.display = 'none';
+    }
+  }
+
+  /* ---------------- APPLIQUER LES IMAGES ---------------- */
+  function applyImage(key, src) {
+    if (key === 'logo') {
+      var el = document.getElementById('navLogoIcon');
+      if (el) el.innerHTML = src ? '<img src="' + src + '" alt="Logo">' : DEFAULT_LOGO;
+    } else if (key === 'heroBg') {
+      var hb = document.getElementById('heroBg');
+      if (hb) hb.style.backgroundImage = src ? 'url(' + src + ')' : '';
+    } else if (key === 'aboutImg') {
+      var img = document.getElementById('aboutImage');
+      var ph = document.getElementById('aboutPlaceholder');
+      if (src) { img.src = src; img.style.display = 'block'; if (ph) ph.style.display = 'none'; }
+      else { img.style.display = 'none'; if (ph) ph.style.display = 'flex'; }
+    } else if (key.indexOf('coach') === 0) {
+      var n = key.replace('coach', '');
+      var ci = document.getElementById('coach' + n + 'Img');
+      var ce = document.getElementById('coach' + n + 'Emoji');
+      if (src) { ci.src = src; ci.style.display = 'block'; if (ce) ce.style.display = 'none'; }
+      else { ci.style.display = 'none'; if (ce) ce.style.display = 'block'; }
+    } else if (key.indexOf('gallery') === 0) {
+      var gi2 = key.replace('gallery', '');
+      var inner = document.getElementById('gallery' + gi2 + 'Inner');
+      if (inner) inner.innerHTML = src
+        ? '<img src="' + src + '" alt="' + (GAL_LABELS[gi2] || '') + '">'
+        : ['🤼','🏆','💪','🥇','🤝','🏋️','🧘','🎉'][gi2];
+    }
+  }
+
+  /* ---------------- ENREGISTRER ---------------- */
+  window.saveAllChanges = function () {
+    var data = {};
+    ALLFIELDS.forEach(function (f) {
+      var el = document.getElementById('cms_' + f.key);
+      if (el) data[f.key] = el.value;
+    });
+    // Clamp video count
+    var vc = parseInt(data.videoCount, 10);
+    if (isNaN(vc) || vc < 1) vc = 3;
+    if (vc > 6) vc = 6;
+    data.videoCount = String(vc);
+    var cmsCountEl = document.getElementById('cms_videoCount');
+    if (cmsCountEl) cmsCountEl.value = String(vc);
+
+    syncSchedule();
+    data.schedule = scheduleData;
+    try {
+      localStorage.setItem('clubData', JSON.stringify(data));
+    } catch (e) {
+      window.showToast('Mémoire texte pleine — réduisez le contenu');
+      return;
+    }
+
+    var imgOk = 0, imgFail = 0;
+    Object.keys(pendingImages).forEach(function (k) {
+      if (pendingImages[k] === 'REMOVE') {
+        localStorage.removeItem('clubImg_' + k);
+        applyImage(k, '');
+        imgOk++;
+      } else {
+        try {
+          localStorage.setItem('clubImg_' + k, pendingImages[k]);
+          applyImage(k, pendingImages[k]);
+          imgOk++;
+        } catch (e) {
+          imgFail++;
+          window.showToast('Image trop lourde : ' + k);
+        }
+      }
+    });
+    pendingImages = {};
+
+    var vidOk = 0, vidFail = 0;
+    var vidPromises = [];
+    Object.keys(pendingVideos).forEach(function (k) {
+      if (pendingVideos[k] === 'REMOVE') {
+        try { localStorage.removeItem('clubVid_' + k); } catch (e) {}
+        vidPromises.push(idbDelete(k));
+        window['_sessionVid_' + k] = null;
+        vidOk++;
+      } else {
+        window['_sessionVid_' + k] = pendingVideos[k];
+        try { localStorage.setItem('clubVid_' + k, pendingVideos[k]); } catch (e) {}
+        vidPromises.push(
+          idbSet(k, pendingVideos[k]).then(function (ok) {
+            if (ok) vidOk++; else vidFail++;
+          })
+        );
+      }
+    });
+    pendingVideos = {};
+
+    // Re-render après sauvegarde IDB
+    Promise.all(vidPromises).then(function () {
+      renderVideosGrid();
+    }).catch(function () {
+      renderVideosGrid();
+    });
+    renderVideosGrid();
+
+    // Re-apply texts after render (grid recreated data-edit elements)
+    ALLFIELDS.forEach(function (f) {
+      if (f.key.indexOf('video') === 0 && (f.key.indexOf('Title') !== -1 || f.key.indexOf('Desc') !== -1)) {
+        setField(f, data[f.key]);
+      } else {
+        setField(f, data[f.key]);
+      }
+    });
+    applySchedule(data.schedule);
+    window.changePassword(true);
+
+    var msg = 'Modifications enregistrées';
+    if (vidFail > 0) {
+      msg = 'Textes OK. ' + vidFail + ' vidéo(s) trop lourde(s) pour le navigateur — cliquez « Télécharger le HTML » pour les inclure, ou utilisez un lien URL.';
+    } else if (vidOk > 0) {
+      msg = 'Enregistré ✓ (' + vidOk + ' vidéo(s)). Pour que les visiteurs les voient : « Télécharger le HTML mis à jour ».';
+    }
+    window.showToast(msg);
+  };
+
+  window.changePassword = function (silent) {
+    var a = document.getElementById('adminNewPassword');
+    var b = document.getElementById('adminConfirmPassword');
+    if (!a || !b) return;
+    if (!a.value && !b.value) return;
+    if (a.value !== b.value) { window.showToast('Les mots de passe ne correspondent pas'); return; }
+    if (a.value.length < 4) { window.showToast('Mot de passe trop court (4 min.)'); return; }
+    localStorage.setItem('clubAdminPwd', a.value);
+    a.value = ''; b.value = '';
+    if (!silent) window.showToast('Mot de passe modifié');
+  };
+
+  window.resetAllContent = function () {
+    if (!confirm('Réinitialiser tout le contenu (textes, horaires, images, vidéos) et revenir à l\'original ?')) return;
+    localStorage.removeItem('clubData');
+    IMAGE_KEYS.forEach(function (im) { localStorage.removeItem('clubImg_' + im.key); });
+    VIDEO_KEYS.forEach(function (vk) { localStorage.removeItem('clubVid_' + vk.key); });
+    location.reload();
+  };
+
+  window.exportJSON = function () {
+    var data = {};
+    try { data = JSON.parse(localStorage.getItem('clubData') || '{}'); } catch (e) {}
+    syncSchedule();
+    data.schedule = scheduleData;
+    IMAGE_KEYS.forEach(function (im) {
+      var s = localStorage.getItem('clubImg_' + im.key);
+      if (s && s !== 'REMOVE') data['_img_' + im.key] = s;
+    });
+    VIDEO_KEYS.forEach(function (vk) {
+      var s = localStorage.getItem('clubVid_' + vk.key);
+      if (s && s !== 'REMOVE') data['_vid_' + vk.key] = s;
+    });
+    var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'contenu-club-lutte.json';
+    a.click();
+    URL.revokeObjectURL(a.href);
+    window.showToast('Sauvegarde exportée');
+  };
+
+  window.importJSON = function (input) {
+    var file = input.files[0];
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      try {
+        var data = JSON.parse(e.target.result);
+        Object.keys(data).forEach(function (k) {
+          if (k.indexOf('_img_') === 0) localStorage.setItem('clubImg_' + k.slice(5), data[k]);
+          if (k.indexOf('_vid_') === 0) localStorage.setItem('clubVid_' + k.slice(5), data[k]);
+        });
+        var clean = {};
+        Object.keys(data).forEach(function (k) {
+          if (k.indexOf('_img_') !== 0 && k.indexOf('_vid_') !== 0) clean[k] = data[k];
+        });
+        try { localStorage.setItem('clubData', JSON.stringify(clean)); } catch (err) {}
+        window.showToast('Contenu importé');
+        setTimeout(function () { location.reload(); }, 600);
+      } catch (err) {
+        window.showToast('Fichier JSON invalide');
+      }
+      input.value = '';
+    };
+    reader.readAsText(file);
+  };
+
+  window.downloadHTML = function () {
+    window.saveAllChanges();
+    // Ensure all session / stored videos are in the live DOM sources before clone
+    renderVideosGrid();
+    VIDEO_KEYS.forEach(function (vk) {
+      var src = localStorage.getItem('clubVid_' + vk.key) || window['_sessionVid_' + vk.key] || '';
+      if (src && src !== 'REMOVE') applyVideo(vk.key, src);
+    });
+    // Small delay so video elements update src attributes
+    setTimeout(function () {
+      var clone = document.documentElement.cloneNode(true);
+      ['#adminOverlay', '#loginOverlay', '#mobileMenu'].forEach(function (sel) {
+        var el = clone.querySelector(sel);
+        if (el) el.classList.remove('open');
+      });
+      // Make sure source tags in clone have the data URLs
+      VIDEO_KEYS.forEach(function (vk) {
+        var n = vk.key.replace('video', '');
+        var src = localStorage.getItem('clubVid_' + vk.key) || window['_sessionVid_' + vk.key] || '';
+        if (src && src !== 'REMOVE') {
+          var sourceEl = clone.querySelector('#video' + n + 'Source');
+          if (sourceEl) sourceEl.setAttribute('src', src);
+          var dlEl = clone.querySelector('#video' + n + 'Download');
+          if (dlEl) {
+            dlEl.setAttribute('href', src);
+            dlEl.style.display = '';
+          }
+        }
+      });
+      var doc = '<!DOCTYPE html>\n' + clone.outerHTML;
+      var blob = new Blob([doc], { type: 'text/html;charset=utf-8' });
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'club-de-lutte.html';
+      a.click();
+      URL.revokeObjectURL(a.href);
+      window.showToast('HTML téléchargé — les vidéos y sont incluses');
+    }, 150);
+  };
+
+  /* ---------------- OUVRIR LE PANNEAU ---------------- */
+  window.openAdminPanel = function () {
+    buildCms();
+    cmsLoadValues();
+    document.getElementById('adminOverlay').classList.add('open');
+  };
+
+  /* ---------------- CHARGER AU DÉMARRAGE ---------------- */
+  function loadAllContent() {
+    var data = {};
+    try { data = JSON.parse(localStorage.getItem('clubData') || '{}'); } catch (e) { data = {}; }
+
+    ALLFIELDS.forEach(function (f) {
+      if (data[f.key] !== undefined && data[f.key] !== '') setField(f, data[f.key]);
+    });
+    if (data.schedule && data.schedule.length) applySchedule(data.schedule);
+    IMAGE_KEYS.forEach(function (im) {
+      var src = null;
+      try { src = localStorage.getItem('clubImg_' + im.key); } catch (e) {}
+      if (src && src !== 'REMOVE') applyImage(im.key, src);
+      else if (src === 'REMOVE') applyImage(im.key, '');
+    });
+
+    // Charger les vidéos depuis IndexedDB (persistant après refresh)
+    function finishVideos() {
+      try { renderVideosGrid(); } catch (err) { console.error(err); }
+    }
+
+    idbGetAllVideos().then(function (all) {
+      if (all) {
+        Object.keys(all).forEach(function (k) {
+          if (all[k]) {
+            window['_sessionVid_' + k] = all[k];
+            // aussi en localStorage si possible (petites)
+            try { localStorage.setItem('clubVid_' + k, all[k]); } catch (e) {}
+          }
+        });
+      }
+      finishVideos();
+    }).catch(function () {
+      finishVideos();
+    });
+    scheduleData = (data.schedule && data.schedule.length) ? data.schedule : seedSchedule();
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', loadAllContent);
+  else loadAllContent();
+})();
+</script>
+    </div>
+  </div>
+</body>
+</html>
